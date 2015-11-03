@@ -1,5 +1,7 @@
 #pragma once
 #include <string>
+#include <map>
+#include <iostream>
 
 using namespace std;
 
@@ -17,20 +19,29 @@ public:
 
 	Room* opposite();
 
+	void addEdge(string dir, Room* edge);
+
+	void setType(char c);
+
+	char getType() {
+		return type;
+	};
+
 private:
 	int x, y = 0;
 
 	Room* parent = nullptr;
 
-	Room* north = nullptr;
-	Room* east = nullptr;
-	Room* south = nullptr;
-	Room* west = nullptr;
+	map<string, Room*> edges;
 
 	string size;
 	string state;
 	string furniture;
 	string light;
+
+	char type = 'N';
+
+	int distance; // BFS property
 
 	string description = "x";
 };

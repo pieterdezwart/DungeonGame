@@ -6,6 +6,7 @@
 #include <ctime>
 #include <sstream>
 #include <string>
+#include <queue>
 
 using namespace std;
 
@@ -17,8 +18,15 @@ public:
 
 	void display();
 
+	void generateMap();
+	void generateMapOld();
+
 private:
-	//int width, height;
+	int x, y;
+
+	vector<vector<Room*>> grid2;
+
+	char *grid; // grid char array
 
 	Room* startRoom = nullptr;
 };

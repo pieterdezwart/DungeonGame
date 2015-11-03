@@ -4,6 +4,11 @@
 
 Room::Room(int x2, int y2, Room* r)
 {
+	edges["north"] = nullptr;
+	edges["east"] = nullptr;
+	edges["south"] = nullptr;
+	edges["west"] = nullptr;
+
 	x = x2;
 	y = y2;
 
@@ -28,9 +33,23 @@ void Room::setDescription(string desc)
 // compute opposite node given that it is in the other direction from the parent
 Room* Room::opposite()
 {
-	if ((x - parent->getX()) != 0)
-		return new Room(x + (x - parent->getX()), y, this);
 	if ((y - parent->getY()) != 0)
 		return new Room(x, y + (y - parent->getY()), this);
+	if ((x - parent->getX()) != 0)
+		return new Room(x + (x - parent->getX()), y, this);
 	return 0;
+}
+
+void Room::addEdge(string dir, Room* edge)
+{
+	auto combi = edges.find(dir);
+
+	if (combi != edges.end()) {
+		combi->second = edge;
+	}
+}
+
+void Room::setType(char c)
+{
+	type = c;
 }
