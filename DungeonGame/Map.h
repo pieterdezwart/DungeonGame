@@ -23,6 +23,8 @@ public:
 
 	void randomPaths();
 
+	Room* getStartRoom();
+
 private:
 	int max_X, max_Y;
 

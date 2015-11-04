@@ -14,8 +14,14 @@ Game::Game()
 
 	bool playing = true;
 
+	Room* startRoom = dungeon->currentMap()->getStartRoom();
+
 	while (playing)
 	{
+		getRoom();
+
+		//getActionList();
+
 		continue;
 	}
 }
@@ -70,4 +76,8 @@ vector<string> Game::split(string str, char delim)
 	}
 
 	return tokens;
+}
+
+void Game::getRoom() {
+	//dungeon->currentMap->getCurrentRoom();
 }

@@ -16,3 +16,8 @@ void Dungeon::generateMap()
 {
 
 }
+
+Map* Dungeon::currentMap() 
+{
+	return map;
+}

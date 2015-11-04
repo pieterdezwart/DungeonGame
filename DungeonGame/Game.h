@@ -6,6 +6,7 @@
 #include <iostream>
 #include "Dungeon.h"
 #include "Enemy.h"
+#include "Hero.h"
 
 using namespace std;
 
@@ -15,12 +16,17 @@ public:
 	Game();
 	~Game();
 
+	void getRoom();
+	void getActionList();
+
 private:
 	vector<string> roomSize, roomState, roomProperties, roomLight;
 	
 	vector<Enemy*> enemies;
 
 	Dungeon* dungeon = nullptr;
+
+	Hero* hero = nullptr;
 
 	void loadRoomFile(string file);
 

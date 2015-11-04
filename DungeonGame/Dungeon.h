@@ -10,6 +10,8 @@ public:
 
 	void generateMap();
 
+	Map* currentMap();
+
 private: 
 	Map* map = nullptr;
 };

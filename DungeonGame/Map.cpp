@@ -437,3 +437,16 @@ void Map::generateMapOld()
 			grid[last->getX()][last->getY()] = 'E';
 	}
 }
+
+Room* Map::getStartRoom()
+{
+	for (int i = 0; i <= max_Y; i++)
+	{
+		for (int x = 0; x <= max_X; x++)
+		{
+
+			if (grid2[i][x]->getType() == 'S')
+				return grid2[i][x];
+		}
+	}
+}
