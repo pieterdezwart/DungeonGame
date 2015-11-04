@@ -7,5 +7,7 @@ int main(int argc, char* args[]) {
 
 	Game* game = new Game();
 
+	cout << "test";
+
 	return 0;
 }

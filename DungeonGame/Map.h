@@ -21,8 +21,10 @@ public:
 	void generateMap();
 	void generateMapOld();
 
+	void randomPaths();
+
 private:
-	int x, y;
+	int max_X, max_Y;
 
 	vector<vector<Room*>> grid2;
 

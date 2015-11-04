@@ -17,11 +17,14 @@ Map::Map(int width, int height)
 
 	//Room* grid[10][10];
 
-	x = width;
-	y = height;
+	max_X = width-1;
+	max_Y = height-1;
 
 	generateMap();
 
+	//randomPaths();
+
+	display();
 
 }
 
@@ -33,13 +36,29 @@ Map::~Map()
 
 void Map::display()
 {
-	/*
-	for (int i = 0; i < 10; i++) {
-		for (int j = 0; j < 10; j++)
-			cout << grid[i][j];
+	for (int i = 0; i <= max_Y; i++) {
+		for (int j = 0; j <= max_X; j++) {
+			if (grid2[i][j] != nullptr) {
+
+				(grid2[i][j]->getEdge("west")) ? cout << "-" : cout << " "; 
+				cout << grid2[i][j]->getType();
+				(grid2[i][j]->getEdge("east")) ? cout << "-" : cout << " ";
+			}
+			else
+				cout << " X ";
+		}
+		cout << endl;
+		for (int j = 0; j <= max_X; j++) {
+			if (grid2[i][j] != nullptr){
+				
+				(grid2[i][j]->getEdge("south")) ? cout << "|" : cout << " ";
+				(grid2[i][j]->getEdge("north")) ? cout << "|" : cout << " ";
+			}
+			else
+				cout << " ";
+		}
 		cout << endl;
 	}
-	*/
 }
 
 /*
@@ -103,32 +122,91 @@ void bfs(Room* start)
 }
 */
 
-void Map::generateMap()
+void Map::randomPaths()
 {
-	//char grid[20][20];
-
-	/*
-	char s[20];
-	for (int i = 0; i < 20; i++)
+	for (int i = 0; i <= max_Y; i++)
 	{
-		//grid[0][i] = new Room();
-		s[i] = 'X';
-
-		//const char* grid[10][10];
-
-		for (int x = 0; x < 20; x++)
+		for (int x = 0; x <= max_X; x++)
 		{
-			grid[x][i] = *s;
-			//strcpy(tab2, tmp.c_str());
+			Room* temp = new Room(x, i, nullptr);
+			temp->setType('N');
+
+			grid2[i][x] = temp;
 		}
 	}
-	*/
 
 	// select random point and open as start node
 	srand((unsigned)time(0)); // activates the random generator
-	startRoom = new Room(rand() % x-1, rand() % y-1, nullptr);
+	grid2[rand() % max_Y][rand() % max_X]->setType('S');
+
+
+	// select random point and open as start node
+	//srand((unsigned)time(0)); // activates the random generator
+	grid2[rand() % max_Y][rand() % max_X]->setType('E');
+
+
+	for (int i = 0; i <= max_Y; i++)
+	{
+		for (int x = 0; x <= max_X; x++)
+		{
+			vector<string> paths = { "north", "east", "south", "west" };
+
+			string randPath = paths[rand() % 3];
+
+			if (randPath == "north")
+			{
+				if(i > 0 && i < max_Y)
+					grid2[i][x]->addEdge(randPath, grid2[i-1][x]);
+			}
+			if (randPath == "east")
+			{
+				if (x > 0 && x < max_X)
+					grid2[i][x]->addEdge(randPath, grid2[i][x+1]);
+			}
+			if (randPath == "south")
+			{
+				if (i > 0 && i < max_Y)
+					grid2[i][x]->addEdge(randPath, grid2[i + 1][x]);
+			}
+			if (randPath == "west")
+			{
+				if (x > 0 && x < max_X)
+					grid2[i][x]->addEdge(randPath, grid2[i][x - 1]);
+			}
+
+			//grid2[i][x]->addEdge(paths[rand() % 3]);
+
+		}
+	}
+
+}
+
+
+void Map::generateMap()
+{
+
+	for (int i = 0; i <= max_Y; i++)
+	{
+
+		//const char* grid[10][10];
+
+		for (int x = 0; x <= max_X; x++)
+		{
+			Room* temp = new Room(x, i, nullptr);
+			temp->setType('X');
+
+			grid2[i][x] = temp;
+
+			//grid[x][i] = *s;
+			//strcpy(tab2, tmp.c_str());
+		}
+	}
+
+	// select random point and open as start node
+	srand((unsigned)time(0)); // activates the random generator
+	startRoom = new Room(rand() % max_X, rand() % max_Y, nullptr);
 	startRoom->setType('S'); // declare start room type
-	grid2[startRoom->getX()][startRoom->getY()] = startRoom;
+	grid2[startRoom->getY()][startRoom->getX()] = startRoom;
 
 
 	// iterate through direct neighbors of node
@@ -138,14 +216,14 @@ void Map::generateMap()
 		for (int y = -1; y <= 1; y++) {
 			if (x == 0 && y == 0 || x != 0 && y != 0)
 				continue;
-			try {
-				if (grid2[startRoom->getX() + x][startRoom->getY() + y] != nullptr) continue;
-			}
-			catch (const std::exception& e) { // ignore ArrayIndexOutOfBounds
+
+			if (startRoom->getY() > 0 && startRoom->getY() < max_Y && startRoom->getX() > 0 && startRoom->getX() < max_X && grid2[startRoom->getY() + x][startRoom->getX() + y]->getType() != 'X')
 				continue;
-			}
+
 			// add eligible points to edges
-			Room* temp = new Room(startRoom->getX() + x, startRoom->getY() + y, startRoom);
+
+			/*
+			Room* temp = new Room(startRoom->getX() + y, startRoom->getY() + x, startRoom);
 
 			if (temp->getY() == startRoom->getY() - 1)
 				startRoom->addEdge("north", temp);
@@ -155,13 +233,14 @@ void Map::generateMap()
 				startRoom->addEdge("south", temp);
 			if (temp->getX() == startRoom->getX() - 1)
 				startRoom->addEdge("west", temp);
+			*/
 
-			frontier.push_back(temp);
+			frontier.push_back(new Room(startRoom->getX() + y, startRoom->getY() + x, startRoom));
 
 		}
 	}
 
-	Room* current = startRoom;
+	//Room* current = startRoom;
 
 	Room* last = nullptr;
 
@@ -171,22 +250,53 @@ void Map::generateMap()
 	while (!frontier.empty()) {
 
 		// pick current node at random
+		//srand((unsigned)time(0)); // activates the random generator
 		int temp = (int)(rand() % frontier.size());
-		Room* node = frontier.at(temp);
+		Room* current = frontier.at(temp);
+		Room* op = current->opposite();
+
+		int tempX = current->getX();
+		int tempY = current->getY();
 		//current->addEdge(node);
+
+		int tempX2 = op->getX();
+		int tempY2 = op->getY();
 		//current = node;
 		frontier.erase(frontier.begin() + temp);
-		Room* op = node->opposite();
+		//Room* op = current->opposite();
 		//current->addEdge(op);
-		current = node;
-		try {
+		//current = node;
 			// if both node and its opposite are walls
-			if (grid2[node->getX()][node->getY()] == nullptr) {
-				if (grid2[op->getX()][op->getY()] == nullptr) {
+			if ( tempY > 0 && tempY < max_Y && tempX > 0 && tempX < max_X && grid2[tempY][tempX]->getType() == 'X') {
+				if (tempY2 > 0 && tempY2 < max_Y && tempX2 > 0 && tempX2 < max_X && grid2[tempY2][tempX2]->getType() == 'X') {
 
 					// open path between the nodes
-					grid2[node->getX()][node->getY()] = node;
-					grid2[op->getX()][op->getY()] = op;
+					
+					
+					if (op->getY() == current->getY() - 1)
+						current->addEdge("north", op);
+					if (op->getX() == current->getX() + 1)
+						current->addEdge("east", op);
+					if (op->getY() == current->getY() + 1)
+						current->addEdge("south", op);
+					if (op->getX() == current->getX() - 1)
+						current->addEdge("west", op);
+						
+					grid2[tempY][tempX] = current;
+					grid2[tempY][tempX]->setType('N');
+
+					
+					if (current->getY() == op->getY() - 1)
+						op->addEdge("north", current);
+					if (current->getX() == op->getX() + 1)
+						op->addEdge("east", current);
+					if (current->getY() == op->getY() + 1)
+						op->addEdge("south", current);
+					if (current->getX() == op->getX() - 1)
+						op->addEdge("west", current);
+						
+					grid2[tempY2][tempX2] = op;
+					grid2[tempY2][tempX2]->setType('N');
 
 					// store last node in order to mark it later
 					last = op;
@@ -196,24 +306,37 @@ void Map::generateMap()
 						for (int y = -1; y <= 1; y++) {
 							if (x == 0 && y == 0 || x != 0 && y != 0)
 								continue;
-							try {
-								if (grid2[op->getX() + x][op->getY() + y] != nullptr) continue;
-							}
-							catch (const std::exception& e) {
+
+							if (tempY2+x > 0 && tempY2+x < max_Y && tempX2+y > 0 && tempX2+y < max_X && grid2[tempY2 + x][tempX2 + y]->getType() != 'X') {
 								continue;
 							}
-							frontier.push_back(new Room(op->getX() + x, op->getY() + y, op));
+							
+							// add eligible points to edges
+
+							
+							Room* temp = new Room(op->getX() + y, op->getY() + x, op);
+
+							if (temp->getY() == startRoom->getY() - 1)
+								startRoom->addEdge("north", temp);
+							if (temp->getX() == startRoom->getX() + 1)
+								startRoom->addEdge("east", temp);
+							if (temp->getY() == startRoom->getY() + 1)
+								startRoom->addEdge("south", temp);
+							if (temp->getX() == startRoom->getX() - 1)
+								startRoom->addEdge("west", temp);
+								
+
+							frontier.push_back(new Room(tempX2 + y,tempY2 + x, op));
 						}
 				}
 			}
-		}
-		catch (const std::exception& e) { // ignore NullPointer and ArrayIndexOutOfBounds
-		}
+
 
 		// if algorithm has resolved, mark end node
-		if (frontier.empty())
-			last->setType('E');
-			grid2[last->getX()][last->getY()] = last;
+		if (frontier.empty()) {
+			//last->setType('E');
+			grid2[tempY2][tempX2]->setType('E');
+		}
 	}
 	
 }

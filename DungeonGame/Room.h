@@ -21,6 +21,8 @@ public:
 
 	void addEdge(string dir, Room* edge);
 
+	Room* getEdge(string dir);
+
 	void setType(char c);
 
 	char getType() {

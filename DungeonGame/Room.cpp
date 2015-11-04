@@ -33,10 +33,22 @@ void Room::setDescription(string desc)
 // compute opposite node given that it is in the other direction from the parent
 Room* Room::opposite()
 {
+	/*
+	if (parent->getY() > y)
+		return new Room(x, 1 + parent->getY(), this);
+	if (parent->getY() < y)
+		return new Room(x, 1 - parent->getY(), this);
+	if (parent->getX() > x)
+		return new Room(1 + parent->getX(), y, this);
+	if (parent->getX() < x)
+		return new Room(1 - parent->getX(), y, this);
+	*/
+
 	if ((y - parent->getY()) != 0)
 		return new Room(x, y + (y - parent->getY()), this);
 	if ((x - parent->getX()) != 0)
 		return new Room(x + (x - parent->getX()), y, this);
+
 	return 0;
 }
 
@@ -46,6 +58,15 @@ void Room::addEdge(string dir, Room* edge)
 
 	if (combi != edges.end()) {
 		combi->second = edge;
+	}
+}
+
+Room* Room::getEdge(string dir)
+{
+	auto combi = edges.find(dir);
+
+	if (combi != edges.end()) {
+		return combi->second;
 	}
 }
 

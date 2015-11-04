@@ -11,6 +11,13 @@ Game::Game()
 	cout << "=============================================" << endl;
 
 	dungeon = new Dungeon();
+
+	bool playing = true;
+
+	while (playing)
+	{
+		continue;
+	}
 }
 
 
