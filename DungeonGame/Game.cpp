@@ -12,16 +12,17 @@ void Game::init()
 
 	dungeon = new Dungeon();
 
-	//Room* startRoom = dungeon->currentMap()->getStartRoom();
-
-	hero = new Hero();
-
-	hero->setLocation(dungeon->currentMap()->getStartRoom()); // put hero in startRoom
-
-
-<<<<<<< HEAD
 	Room* startRoom = dungeon->currentMap()->getStartRoom();
+
 	hero = new Hero(startRoom);
+
+
+}
+
+void Game::gameLoop()
+{
+	bool playing = true;
+
 	string input = "";
 	while (playing)
 	{
@@ -38,23 +39,6 @@ void Game::init()
 			system("cls");
 		}
 		getRoom();
-=======
-}
-
-void Game::gameLoop()
-{
-	bool playing = true;
-
-	while (playing)
-	{
-		//getRoom();
->>>>>>> 24210e13f45d3d761dd3ff33b641959b58c6ba85
-
-		//getActionList();
-
-
-
-		continue;
 	}
 }
 
