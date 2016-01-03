@@ -206,6 +206,7 @@ void Map::generateMap()
 	srand((unsigned)time(0)); // activates the random generator
 	startRoom = new Room(rand() % max_X, rand() % max_Y, nullptr);
 	startRoom->setType('S'); // declare start room type
+	startRoom->setDescription("Dit is de ingang van de kerker. De deur naar buiten is dicht.");
 	grid2[startRoom->getY()][startRoom->getX()] = startRoom;
 
 

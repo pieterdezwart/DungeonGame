@@ -27,6 +27,15 @@ public:
 	void getRoom();
 	void getActionList();
 
+	vector<string> getRoomSizes();
+	vector<string> getRoomStates();
+	vector<string> getRoomProperties();
+	vector<string> getRoomLights();
+
+	string getRandStringElem(vector<string> array);
+
+	string genRoomDescription();
+
 private:
 	// Private constructor
 	Game() {};

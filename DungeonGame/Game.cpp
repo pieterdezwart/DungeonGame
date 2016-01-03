@@ -1,5 +1,5 @@
 #include "Game.h"
-
+#include <ctime>
 
 void Game::init()
 {
@@ -86,4 +86,66 @@ vector<string> Game::split(string str, char delim)
 
 void Game::getRoom() {
 	cout << hero->getLocation()->getDescription();
+}
+
+vector<string> Game::getRoomSizes()
+{
+	return roomSize;
+}
+
+vector<string> Game::getRoomStates()
+{
+	return roomState;
+}
+
+vector<string> Game::getRoomProperties()
+{
+	return roomProperties;
+}
+
+vector<string> Game::getRoomLights()
+{
+	return roomLight;
+}
+
+string Game::getRandStringElem(vector<string> array)
+{
+	srand((unsigned)time(NULL)); // seed based on current timestamp
+
+	int r = rand() % (array.size() - 1);
+
+	return array.at(r);
+}
+
+string Game::genRoomDescription()
+{
+	string description = "Het is een ";
+
+	string size = getRandStringElem(roomSize);
+
+	if (size == "groot") 
+		size = "grote"; 
+	else 
+		size += "e";
+
+	string state = getRandStringElem(roomState);
+
+	state += "e";
+
+	description += size + " " + state + " kamer.";
+
+	string property = getRandStringElem(roomProperties);
+
+	if (property == "tafel met 4 stoelen")
+		description += "In het midden staat een " + property + ".";
+	if (property == "een bed")
+		description += "In de hoek staat " + property + ".";
+	if (property == "leeg")
+		description += "Het is een lege ruimte.";
+
+	string light = getRandStringElem(roomLight);
+
+	description += "Hij wordt verlicht door " + light + ".";
+
+	return description;
 }

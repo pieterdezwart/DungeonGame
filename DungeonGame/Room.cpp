@@ -1,9 +1,11 @@
 #include "Room.h"
-
+#include "Game.h"
 
 
 Room::Room(int x2, int y2, Room* r)
 {
+	Game::getInstance().genRoomDescription();
+
 	edges["north"] = nullptr;
 	edges["east"] = nullptr;
 	edges["south"] = nullptr;
