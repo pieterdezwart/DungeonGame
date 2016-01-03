@@ -1,0 +1,7 @@
+rat,1,2,1
+spider,1,2,1
+skeleton,2,3,2
+goblin,2,3,2
+kobold,2,4,2
+orc,3,5,3
+troll,3,5,3

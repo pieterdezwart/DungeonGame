@@ -5,6 +5,14 @@ void Game::init()
 {
 	loadRoomFile("room.txt");
 
+	loadEnemiesFile("enemy.txt");
+
+	// test enemies
+	for (Enemy* enemy : enemies)
+	{
+		cout << enemy->getName() << ", " << enemy->getAttack() << ", " << enemy->getHealth() << ", " << enemy->getExperience() << ", " << enemy->getLevel() << endl;
+	}
+
 	cout << endl;
 	cout << "=============================================" << endl;
 	cout << "=		DUNGEON GAME		=" << endl;
@@ -72,7 +80,20 @@ void Game::loadRoomFile(string file)
 
 void Game::loadEnemiesFile(string file)
 {
+	ifstream input_file{ file };
 
+	string line;
+
+	// for each new line in enemy.txt create a new enemy object
+	while (getline(input_file, line))
+	{
+		vector<string> enemyProperties = split(line, ',');
+
+		cout << enemyProperties[0] << endl;
+
+		enemies.push_back(new Enemy(enemyProperties.at(0), std::stoi(enemyProperties.at(1)), std::stoi(enemyProperties.at(2)), std::stoi(enemyProperties.at(3)), 1));
+
+	}
 }
 
 // split a string in string tokens by delimiter
