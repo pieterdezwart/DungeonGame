@@ -29,6 +29,8 @@ public:
 		return type;
 	};
 
+	string getExitStrings();
+
 private:
 	int x, y = 0;
 
