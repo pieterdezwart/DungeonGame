@@ -74,3 +74,13 @@ void Room::setType(char c)
 {
 	type = c;
 }
+
+string Room::getExitStrings()
+{
+	string ret = "";
+	for (auto const& kv : edges)
+	{
+		ret = ret + kv.first + " ";
+	}
+	return ret;
+}

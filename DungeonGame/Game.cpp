@@ -15,9 +15,22 @@ Game::Game()
 	bool playing = true;
 
 	Room* startRoom = dungeon->currentMap()->getStartRoom();
-
+	hero = new Hero(startRoom);
+	string input = "";
 	while (playing)
 	{
+		cin >> input;
+		//CODE BELOW IS TEMPORARY TO TEST
+		if (input == "move")
+		{
+			cout << "what direction \n";
+			cin >> input;
+			hero->move(input);
+		}
+		if (input == "cls")
+		{
+			system("cls");
+		}
 		getRoom();
 
 		//getActionList();
@@ -55,7 +68,7 @@ void Game::loadRoomFile(string file)
 
 	for (string s : roomSize)
 	{
-		cout << s << endl;
+		//cout << s << endl;
 	}
 }
 
