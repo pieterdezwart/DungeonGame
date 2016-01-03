@@ -13,13 +13,28 @@ using namespace std;
 class Game
 {
 public:
-	Game();
-	~Game();
+	static Game& getInstance()
+	{
+		/* The only instance, guaranteed to be lazy initialized,
+		guaranteed that it will be destroyed correctly */
+		static Game instance;
+		return instance;
+	}
+
+	void init();
+	void gameLoop();
 
 	void getRoom();
 	void getActionList();
 
 private:
+	// Private constructor
+	Game() {};
+
+	// Stop the compiler generating methods of copy the object
+	Game(Game const&) = delete;
+	void operator=(Game const&) = delete;
+
 	vector<string> roomSize, roomState, roomProperties, roomLight;
 	
 	vector<Enemy*> enemies;

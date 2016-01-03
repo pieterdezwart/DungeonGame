@@ -5,9 +5,13 @@ int main(int argc, char* args[]) {
 
 	//Dungeon* dungeon = new Dungeon();
 
-	Game* game = new Game();
+	//Game* game = new Game();
 
-	cout << "test";
+	Game::getInstance().init();
+
+	Game::getInstance().gameLoop();
+
+	//cout << "test";
 
 	return 0;
 }

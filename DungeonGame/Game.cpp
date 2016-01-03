@@ -1,7 +1,7 @@
 #include "Game.h"
 
 
-Game::Game()
+void Game::init()
 {
 	loadRoomFile("room.txt");
 
@@ -12,23 +12,29 @@ Game::Game()
 
 	dungeon = new Dungeon();
 
-	bool playing = true;
+	//Room* startRoom = dungeon->currentMap()->getStartRoom();
 
-	Room* startRoom = dungeon->currentMap()->getStartRoom();
+	hero = new Hero();
+
+	hero->setLocation(dungeon->currentMap()->getStartRoom()); // put hero in startRoom
+
+
+}
+
+void Game::gameLoop()
+{
+	bool playing = true;
 
 	while (playing)
 	{
-		getRoom();
+		//getRoom();
 
 		//getActionList();
 
+
+
 		continue;
 	}
-}
-
-
-Game::~Game()
-{
 }
 
 void Game::loadRoomFile(string file)
@@ -79,5 +85,5 @@ vector<string> Game::split(string str, char delim)
 }
 
 void Game::getRoom() {
-	//dungeon->currentMap->getCurrentRoom();
+	cout << hero->getLocation()->getDescription();
 }
