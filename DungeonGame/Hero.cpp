@@ -12,6 +12,7 @@ Hero::~Hero()
 {
 }
 
+<<<<<<< HEAD
 void Hero::look()
 {
 	cout << "Je kijkt om je heen \n";
@@ -33,3 +34,14 @@ void Hero::move(string direction)
 		setLocation(next);
 	}
 }
+=======
+void Hero::setLocation(Room* room)
+{
+	currentRoom = room;
+}
+
+Room* Hero::getLocation()
+{
+	return currentRoom;
+}
+>>>>>>> 24210e13f45d3d761dd3ff33b641959b58c6ba85
