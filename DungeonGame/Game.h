@@ -36,6 +36,8 @@ public:
 
 	string genRoomDescription();
 
+	void genEnemies(Room* location);
+
 private:
 	// Private constructor
 	Game() {};

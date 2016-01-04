@@ -10,6 +10,8 @@
 
 using namespace std;
 
+class Enemy;
+
 class Map
 {
 public:
@@ -25,6 +27,11 @@ public:
 
 	Room* getStartRoom();
 
+	vector<Enemy*> getEnemies() { return enemies; };
+	void addEnemy(Enemy* enemy);
+	vector<Enemy*> getEnemies(Room* location);
+	bool removeEnemy(Enemy* enemy);
+
 private:
 	int max_X, max_Y;
 
@@ -33,5 +40,7 @@ private:
 	char *grid; // grid char array
 
 	Room* startRoom = nullptr;
+
+	vector<Enemy*> enemies;
 };
 

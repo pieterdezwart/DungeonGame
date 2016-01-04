@@ -4,7 +4,9 @@
 
 Room::Room(int x2, int y2, Room* r)
 {
-	Game::getInstance().genRoomDescription();
+	description = Game::getInstance().genRoomDescription();
+
+	Game::getInstance().genEnemies(this);
 
 	edges["north"] = nullptr;
 	edges["east"] = nullptr;

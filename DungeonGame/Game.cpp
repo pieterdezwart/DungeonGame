@@ -3,6 +3,8 @@
 
 void Game::init()
 {
+	srand(time(NULL)); // random number seed
+
 	loadRoomFile("room.txt");
 
 	loadEnemiesFile("enemy.txt");
@@ -89,7 +91,7 @@ void Game::loadEnemiesFile(string file)
 	{
 		vector<string> enemyProperties = split(line, ',');
 
-		cout << enemyProperties[0] << endl;
+		//cout << enemyProperties[0] << endl;
 
 		enemies.push_back(new Enemy(enemyProperties.at(0), std::stoi(enemyProperties.at(1)), std::stoi(enemyProperties.at(2)), std::stoi(enemyProperties.at(3)), 1));
 
@@ -136,8 +138,6 @@ vector<string> Game::getRoomLights()
 
 string Game::getRandStringElem(vector<string> array)
 {
-	srand((unsigned)time(NULL)); // seed based on current timestamp
-
 	int r = rand() % (array.size() - 1);
 
 	return array.at(r);
@@ -174,4 +174,31 @@ string Game::genRoomDescription()
 	description += "Hij wordt verlicht door " + light + ".";
 
 	return description;
+}
+
+void Game::genEnemies(Room* location)
+{
+	// per room the chance of enemies is 40%?
+	int roll = rand() % 100;
+
+	if (roll > 60)
+	{
+		// now roll for number of enemies
+		while ( roll != 0)
+		{
+			roll = rand() % 3;
+		}
+
+		// pick a random type for each enemy
+		for (int i = 0; i < roll; i++)
+		{
+			Enemy* enemy = enemies.at(rand() % (enemies.size() - 1));
+			enemy->setLocation(location);
+
+			dungeon->currentMap()->addEnemy(enemy);
+
+			delete enemy;
+		}
+
+	}
 }

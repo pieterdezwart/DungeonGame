@@ -451,3 +451,19 @@ Room* Map::getStartRoom()
 		}
 	}
 }
+
+void Map::addEnemy(Enemy * enemy)
+{
+	enemies.push_back(enemy);
+}
+
+vector<Enemy*> Map::getEnemies(Room * location)
+{
+	return vector<Enemy*>();
+}
+
+
+bool Map::removeEnemy(Enemy * enemy)
+{
+	return false;
+}
