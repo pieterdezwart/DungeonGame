@@ -44,7 +44,12 @@ void Game::init()
 
 	hero = new Hero(startRoom);
 
+	vector<Enemy*> enemies2 = dungeon->currentMap()->getEnemies();
 
+	for (Enemy* enemy : enemies2)
+	{
+		cout << enemy->getName() << endl;
+	}
 }
 
 void Game::gameLoop()
@@ -230,7 +235,7 @@ string Game::genRoomDescription()
 	return description;
 }
 
-void Game::genEnemies(Room* location)
+void Game::genEnemies(Room* location, Map* m)
 {
 	// per room the chance of enemies is 40%?
 	int roll = rand() % 100;
@@ -238,10 +243,12 @@ void Game::genEnemies(Room* location)
 	if (roll > 60)
 	{
 		// now roll for number of enemies
-		while ( roll != 0)
-		{
-			roll = rand() % 3;
-		}
+		//while ( roll != 0)
+		//{
+		//	roll = rand() % 3;
+		//}
+
+		roll = rand() % 3;
 
 		// pick a random type for each enemy
 		for (int i = 0; i < roll; i++)
@@ -249,15 +256,17 @@ void Game::genEnemies(Room* location)
 			Enemy* enemy = enemies.at(rand() % (enemies.size() - 1));
 			enemy->setLocation(location);
 
-			dungeon->currentMap()->addEnemy(enemy);
+			//dungeon->currentMap()->display();
+			//dungeon->currentMap()->addEnemy(enemy);
+			m->addEnemy(enemy);
 
-			delete enemy;
+			//delete enemy;
 		}
 
 	}
 }
 
-void Game::genTraps(Room* location)
+void Game::genTraps(Room* location, Map* m)
 {
 	// per room the chance of a trap is 10%?
 	int roll = rand() % 100;
@@ -267,16 +276,16 @@ void Game::genTraps(Room* location)
 		Trap* trap = traps.at(rand() % (traps.size() - 1));
 		trap->setLocation(location);
 
-		dungeon->currentMap()->addTrap(trap);
-
-		delete trap;
+		//dungeon->currentMap()->addTrap(trap);
+		m->addTrap(trap);
+		//delete trap;
 
 	}
 }
 
-void Game::genItems(Room* location)
+void Game::genItems(Room* location, Map* m)
 {
-	// per room the chance of a trap is 5%?
+	// per room the chance of an item is 5%?
 	int roll = rand() % 100;
 
 	if (roll >= 95)
@@ -284,7 +293,8 @@ void Game::genItems(Room* location)
 		Item* item = items.at(rand() % (items.size() - 1));
 		item->setLocation(location);
 
-		dungeon->currentMap()->addItem(item);
+		//dungeon->currentMap()->addItem(item);
+		m->addItem(item);
 
 		delete item;
 

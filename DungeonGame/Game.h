@@ -39,11 +39,11 @@ public:
 
 	string genRoomDescription();
 
-	void genEnemies(Room* location);
+	void genEnemies(Room* location, Map* m);
 
-	void genTraps(Room* location);
+	void genTraps(Room* location, Map* m);
 
-	void genItems(Room* location);
+	void genItems(Room* location, Map* m);
 
 private:
 	// Private constructor

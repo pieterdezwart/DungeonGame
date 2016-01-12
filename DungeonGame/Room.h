@@ -5,10 +5,12 @@
 
 using namespace std;
 
+class Map;
+
 class Room
 {
 public:
-	Room(int x, int y, Room* r);
+	Room(int x, int y, Map* m);
 	~Room();
 
 	string getDescription();
@@ -17,7 +19,6 @@ public:
 	int getX() { return x; };
 	int getY() { return y; };
 
-	Room* opposite();
 
 	void addEdge(string dir, Room* edge);
 	void addEdge(Room* edge);
@@ -38,8 +39,6 @@ public:
 
 private:
 	int x, y = 0;
-
-	Room* parent = nullptr;
 
 	map<string, Room*> edges;
 

@@ -7,12 +7,11 @@
 #include <sstream>
 #include <string>
 #include <queue>
+#include "Enemy.h"
+#include "Item.h"
+#include "Trap.h"
 
 using namespace std;
-
-class Enemy;
-class Trap;
-class Item;
 
 class Map
 {

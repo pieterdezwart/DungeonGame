@@ -1,14 +1,14 @@
 #include "Room.h"
 #include "Game.h"
+#include "Map.h"
 
-
-Room::Room(int x2, int y2, Room* r)
+Room::Room(int x2, int y2, Map* map)
 {
 	description = Game::getInstance().genRoomDescription();
 
-	Game::getInstance().genEnemies(this);
-	//Game::getInstance().genTraps(this);
-	//Game::getInstance().genItems(this);
+	Game::getInstance().genEnemies(this, map);
+	//Game::getInstance().genTraps(this, map);
+	//Game::getInstance().genItems(this, map);
 
 	edges["north"] = nullptr;
 	edges["east"] = nullptr;
@@ -18,7 +18,7 @@ Room::Room(int x2, int y2, Room* r)
 	x = x2;
 	y = y2;
 
-	parent = r;
+	//parent = r;
 }
 
 
@@ -36,27 +36,6 @@ void Room::setDescription(string desc)
 	description = desc;
 }
 
-// compute opposite node given that it is in the other direction from the parent
-Room* Room::opposite()
-{
-	/*
-	if (parent->getY() > y)
-		return new Room(x, 1 + parent->getY(), this);
-	if (parent->getY() < y)
-		return new Room(x, 1 - parent->getY(), this);
-	if (parent->getX() > x)
-		return new Room(1 + parent->getX(), y, this);
-	if (parent->getX() < x)
-		return new Room(1 - parent->getX(), y, this);
-	*/
-
-	if ((y - parent->getY()) != 0)
-		return new Room(x, y + (y - parent->getY()), this);
-	if ((x - parent->getX()) != 0)
-		return new Room(x + (x - parent->getX()), y, this);
-
-	return 0;
-}
 
 void Room::addEdge(string dir, Room* edge)
 {

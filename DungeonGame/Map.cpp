@@ -1,5 +1,4 @@
 #include "Map.h"
-#include "Trap.h"
 
 
 Map::Map(int width, int height)
@@ -67,7 +66,7 @@ void Map::generateMap()
 	{
 		for (int x = 0; x <= max_X; x++)
 		{
-			Room* temp = new Room(x, i, nullptr);
+			Room* temp = new Room(x, i, this);
 			temp->setType('X');
 
 			grid2[i][x] = temp;
@@ -79,7 +78,7 @@ void Map::generateMap()
 
 	// select random point and open as start node
 	srand((unsigned)time(0)); // activates the random generator
-	startRoom = new Room(rand() % max_X, rand() % max_Y, nullptr);
+	startRoom = new Room(rand() % max_X, rand() % max_Y, this);
 	startRoom->setType('S'); // declare start room type
 	startRoom->setDescription("Dit is de ingang van de kerker. De deur naar buiten is dicht.");
 	grid2[startRoom->getY()][startRoom->getX()] = startRoom;
