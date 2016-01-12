@@ -49,7 +49,9 @@ void Game::gameLoop()
 			system("cls");
 		}
 		getRoom();
+		dungeon->currentMap()->display(hero->getLocation());
 	}
+
 }
 
 void Game::loadRoomFile(string file)

@@ -67,8 +67,8 @@ void Room::addEdge(string dir, Room* edge)
 
 void Room::addEdge(Room* edge)
 {
-	if (x == edge->getX() && y > edge->getY()) addEdge("south", edge);
-	if (x == edge->getX() && y < edge->getY()) addEdge("north", edge);
+	if (x == edge->getX() && y < edge->getY()) addEdge("south", edge);
+	if (x == edge->getX() && y > edge->getY()) addEdge("north", edge);
 	if (x < edge->getX() && y == edge->getY()) addEdge("east", edge);
 	if (x > edge->getX() && y == edge->getY()) addEdge("west", edge);
 }
