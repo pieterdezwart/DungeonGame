@@ -1,0 +1,3 @@
+kuil,1
+landmijn,3
+laser,2

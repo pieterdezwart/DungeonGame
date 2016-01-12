@@ -10,6 +10,9 @@
 
 using namespace std;
 
+class Trap;
+class Item;
+
 class Game
 {
 public:
@@ -38,6 +41,10 @@ public:
 
 	void genEnemies(Room* location);
 
+	void genTraps(Room* location);
+
+	void genItems(Room* location);
+
 private:
 	// Private constructor
 	Game() {};
@@ -48,7 +55,9 @@ private:
 
 	vector<string> roomSize, roomState, roomProperties, roomLight;
 	
-	vector<Enemy*> enemies;
+	vector<Enemy*> enemies; // contains all the enemies from the text file
+	vector<Trap*> traps; // contains all the traps from the text file
+	vector<Item*> items; // contains all the items from the text file
 
 	Dungeon* dungeon = nullptr;
 
@@ -57,6 +66,10 @@ private:
 	void loadRoomFile(string file);
 
 	void loadEnemiesFile(string file);
+
+	void loadTrapFile(string file);
+
+	void loadItemFile(string file);
 
 	vector<string> Game::split(string str, char delim);
 };

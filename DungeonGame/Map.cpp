@@ -1,5 +1,5 @@
 #include "Map.h"
-
+#include "Trap.h"
 
 
 Map::Map(int width, int height)
@@ -166,11 +166,41 @@ void Map::addEnemy(Enemy * enemy)
 
 vector<Enemy*> Map::getEnemies(Room * location)
 {
-	return vector<Enemy*>();
+	return enemies;
 }
 
 
 bool Map::removeEnemy(Enemy * enemy)
+{
+	return false;
+}
+
+void Map::addTrap(Trap * trap)
+{
+	traps.push_back(trap);
+}
+
+vector<Trap*> Map::getTraps(Room * location)
+{
+	return traps;
+}
+
+bool Map::removeTrap(Trap * trap)
+{
+	return false;
+}
+
+void Map::addItem(Item * item)
+{
+	items.push_back(item);
+}
+
+vector<Item*> Map::getItems(Room * location)
+{
+	return items;
+}
+
+bool Map::removeItem(Item * item)
 {
 	return false;
 }
