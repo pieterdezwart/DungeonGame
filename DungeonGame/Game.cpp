@@ -1,4 +1,6 @@
 #include "Game.h"
+#include "Trap.h"
+#include "Item.h"
 #include <ctime>
 
 void Game::init()
@@ -9,10 +11,26 @@ void Game::init()
 
 	loadEnemiesFile("enemy.txt");
 
+	loadTrapFile("trap.txt");
+
+	loadItemFile("item.txt");
+
 	// test enemies
 	for (Enemy* enemy : enemies)
 	{
 		cout << enemy->getName() << ", " << enemy->getAttack() << ", " << enemy->getHealth() << ", " << enemy->getExperience() << ", " << enemy->getLevel() << endl;
+	}
+
+	// test traps
+	for (Trap* trap : traps)
+	{
+		cout << trap->getName() << ", " << trap->getAttack() << endl;
+	}
+
+	// test items
+	for (Item* item : items)
+	{
+		cout << item->getName() << ", " << item->getAttack() << endl;
 	}
 
 	cout << endl;
@@ -94,6 +112,42 @@ void Game::loadEnemiesFile(string file)
 		//cout << enemyProperties[0] << endl;
 
 		enemies.push_back(new Enemy(enemyProperties.at(0), std::stoi(enemyProperties.at(1)), std::stoi(enemyProperties.at(2)), std::stoi(enemyProperties.at(3)), 1));
+
+	}
+}
+
+void Game::loadTrapFile(string file)
+{
+	ifstream input_file{ file };
+
+	string line;
+
+	// for each new line in enemy.txt create a new enemy object
+	while (getline(input_file, line))
+	{
+		vector<string> trapProperties = split(line, ',');
+
+		//cout << enemyProperties[0] << endl;
+
+		traps.push_back(new Trap(trapProperties.at(0), std::stoi(trapProperties.at(1))));
+
+	}
+}
+
+void Game::loadItemFile(string file)
+{
+	ifstream input_file{ file };
+
+	string line;
+
+	// for each new line in enemy.txt create a new enemy object
+	while (getline(input_file, line))
+	{
+		vector<string> trapProperties = split(line, ',');
+
+		//cout << enemyProperties[0] << endl;
+
+		items.push_back(new Item(trapProperties.at(0), std::stoi(trapProperties.at(1)), std::stoi(trapProperties.at(2)), std::stoi(trapProperties.at(3))));
 
 	}
 }
@@ -199,6 +253,40 @@ void Game::genEnemies(Room* location)
 
 			delete enemy;
 		}
+
+	}
+}
+
+void Game::genTraps(Room* location)
+{
+	// per room the chance of a trap is 10%?
+	int roll = rand() % 100;
+
+	if (roll > 90)
+	{
+		Trap* trap = traps.at(rand() % (traps.size() - 1));
+		trap->setLocation(location);
+
+		dungeon->currentMap()->addTrap(trap);
+
+		delete trap;
+
+	}
+}
+
+void Game::genItems(Room* location)
+{
+	// per room the chance of a trap is 5%?
+	int roll = rand() % 100;
+
+	if (roll >= 95)
+	{
+		Item* item = items.at(rand() % (items.size() - 1));
+		item->setLocation(location);
+
+		dungeon->currentMap()->addItem(item);
+
+		delete item;
 
 	}
 }

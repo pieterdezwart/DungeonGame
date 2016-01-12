@@ -1,0 +1,6 @@
+gouden munt,0,0,0
+zilveren munt,0,0,0
+zwaard,2,0,0
+hamer,1,0,0
+houten schild,0,1,0
+potion,0,0,3

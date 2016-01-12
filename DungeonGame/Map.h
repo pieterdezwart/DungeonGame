@@ -11,6 +11,8 @@
 using namespace std;
 
 class Enemy;
+class Trap;
+class Item;
 
 class Map
 {
@@ -32,6 +34,16 @@ public:
 	vector<Enemy*> getEnemies(Room* location);
 	bool removeEnemy(Enemy* enemy);
 
+	vector<Trap*> getTraps() { return traps; };
+	void addTrap(Trap* trap);
+	vector<Trap*> getTraps(Room* location);
+	bool removeTrap(Trap* trap);
+
+	vector<Item*> getItems() { return items; };
+	void addItem(Item* item);
+	vector<Item*> getItems(Room* location);
+	bool removeItem(Item* item);
+
 private:
 	int max_X, max_Y;
 
@@ -41,6 +53,8 @@ private:
 
 	Room* startRoom = nullptr;
 
-	vector<Enemy*> enemies;
+	vector<Enemy*> enemies; // all the enemies in the map
+	vector<Trap*> traps; // all the traps in the map
+	vector<Item*> items; // all the items in the map
 };
 

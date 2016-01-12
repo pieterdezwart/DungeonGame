@@ -7,6 +7,8 @@ Room::Room(int x2, int y2, Room* r)
 	description = Game::getInstance().genRoomDescription();
 
 	Game::getInstance().genEnemies(this);
+	//Game::getInstance().genTraps(this);
+	//Game::getInstance().genItems(this);
 
 	edges["north"] = nullptr;
 	edges["east"] = nullptr;
