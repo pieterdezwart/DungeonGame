@@ -36,8 +36,10 @@ public:
 	bool isLinked(Room* r);
 	int numEdges();
 	string randFreeEdge();
-
+	bool isExplored() { return explored; };
+	void setExplored(bool exp) { explored = exp; };
 private:
+	bool explored = false;
 	int x, y = 0;
 
 	map<string, Room*> edges;

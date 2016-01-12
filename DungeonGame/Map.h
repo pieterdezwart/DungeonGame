@@ -19,7 +19,7 @@ public:
 	Map(int width, int height);
 	~Map();
 
-	void display();
+	void display(Room* heropos);
 
 	void generateMap();
 

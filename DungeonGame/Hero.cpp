@@ -28,9 +28,9 @@ void Hero::search()
 
 void Hero::move(string direction)
 {
-	Room* next = location->getEdge(direction); 
-	if (next != NULL)
+	if (location->getEdge(direction))
 	{
+		Room* next = location->getEdge(direction);
 		setLocation(next);
 	}
 }

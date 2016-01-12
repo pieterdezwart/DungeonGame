@@ -23,8 +23,6 @@ Map::Map(int width, int height)
 
 	//randomPaths();
 
-	display();
-
 }
 
 
@@ -33,23 +31,45 @@ Map::~Map()
 }
 
 
-void Map::display()
+void Map::display(Room* heropos)
 {
+	cout << "\n";
 	for (int i = 0; i <= max_Y; i++) {
 		for (int j = 0; j <= max_X; j++) {
-			if (grid2[i][j] != nullptr) {
+			Room* r = grid2[i][j];
+			if (r != nullptr) {
 
 				//(grid2[i][j]->getEdge("west")) ? cout << "-" : cout << " "; 
-				cout << grid2[i][j]->getType();
-				(grid2[i][j]->getEdge("east")) ? cout << "-" : cout << " ";
+				if (r == heropos)
+					cout << "H";
+				else
+					(r->isExplored()) ? cout<<  r->getType() :  cout<<" ";
+				(r->getEdge("east") && (r->isExplored() || r->getEdge("east")->isExplored())) ? cout << "-" : cout << " ";
 			}
 			else
 				cout << "X ";
 		}
 		cout << endl;
 		for (int j = 0; j <= max_X; j++) {
-			if (grid2[i][j] != nullptr){
-				(grid2[i][j]->getEdge("north")) ? cout << "| " : cout << "  ";
+			Room* r = grid2[i][j];
+			if (r != nullptr){
+				if (r->getEdge("south") && r->isExplored())
+					cout << "| ";
+				else
+				{
+					if (coordsExist(i + 1, j))
+					{
+						Room* r2 = grid2[i+1][j];
+						if (r2->getEdge("north") && r2->isExplored())
+						{
+							cout << "| ";
+						}
+						else
+							cout << "  ";
+					}
+					else
+						cout << "  ";
+				}
 				//(grid2[i][j]->getEdge("north")) ? cout << "s" : cout << "  ";
 			}
 			else
