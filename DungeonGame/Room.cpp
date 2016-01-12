@@ -65,6 +65,48 @@ void Room::addEdge(string dir, Room* edge)
 	}
 }
 
+void Room::addEdge(Room* edge)
+{
+	if (x == edge->getX() && y > edge->getY()) addEdge("south", edge);
+	if (x == edge->getX() && y < edge->getY()) addEdge("north", edge);
+	if (x < edge->getX() && y == edge->getY()) addEdge("east", edge);
+	if (x > edge->getX() && y == edge->getY()) addEdge("west", edge);
+}
+
+bool Room::isLinked(Room* r)
+{
+	for (auto const& kv : edges)
+	{
+		if (kv.second == r)
+			return true;
+	}
+	return false;
+}
+
+string Room::randFreeEdge()
+{
+	string ret = "";
+	string dirs[4] = { "north", "east", "south", "west" };
+	while (ret == "" && numEdges() < 4)
+	{
+		int r = rand() % 4;
+		if (edges.at(dirs[r]) == nullptr)
+			ret = dirs[r];
+	}
+	return ret;
+}
+
+int Room::numEdges()
+{
+	int ret = 0;
+	for (auto const& kv : edges)
+	{
+		if (kv.second != nullptr)
+			ret++;
+	}
+	return ret;
+}
+
 Room* Room::getEdge(string dir)
 {
 	auto combi = edges.find(dir);

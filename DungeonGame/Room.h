@@ -20,6 +20,7 @@ public:
 	Room* opposite();
 
 	void addEdge(string dir, Room* edge);
+	void addEdge(Room* edge);
 
 	Room* getEdge(string dir);
 
@@ -30,6 +31,10 @@ public:
 	};
 
 	string getExitStrings();
+
+	bool isLinked(Room* r);
+	int numEdges();
+	string randFreeEdge();
 
 private:
 	int x, y = 0;
