@@ -27,8 +27,7 @@ public:
 	void init();
 	void gameLoop();
 
-	void getRoom();
-	void getActionList();
+	string getRoom();
 
 	vector<string> getRoomSizes();
 	vector<string> getRoomStates();
@@ -44,6 +43,9 @@ public:
 	void genTraps(Room* location, Map* m);
 
 	void genItems(Room* location, Map* m);
+
+	Hero* getHero() { return hero; };
+	Dungeon* getDungeon() { return dungeon; };
 
 private:
 	// Private constructor

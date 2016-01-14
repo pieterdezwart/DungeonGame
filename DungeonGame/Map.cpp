@@ -77,6 +77,20 @@ void Map::display(Room* heropos)
 		}
 		cout << endl;
 	}
+	cout << getLegend();
+}
+
+string Map::getLegend()
+{
+	string ret = "";
+	ret = ret + "Legenda:\n";
+	ret = ret + ":- : Hallways\n";
+	ret = ret + "S  : Starting location\n";
+	ret = ret + "X  : Room\n";
+	ret = ret + "L  : Stairs down\n";
+	ret = ret + "H  : Stairs up\n";
+	ret = ret + "H  : Hero's location\n";
+	return ret;
 }
 
 void Map::generateMap()

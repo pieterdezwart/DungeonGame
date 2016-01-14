@@ -13,7 +13,7 @@ public:
 
 	void look();
 	void search();
-	void move(string direction);
+	bool move(string direction);
 private:
 	int x, y = 0;
 	Room* currentRoom = nullptr; // current location of the hero

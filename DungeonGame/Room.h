@@ -32,7 +32,7 @@ public:
 	};
 
 	string getExitStrings();
-
+	map<string, Room*> getEdges() { return edges; };
 	bool isLinked(Room* r);
 	int numEdges();
 	string randFreeEdge();

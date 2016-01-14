@@ -26,11 +26,14 @@ void Hero::search()
 
 }
 
-void Hero::move(string direction)
+bool Hero::move(string direction)
 {
-	if (location->getEdge(direction))
-	{
-		Room* next = location->getEdge(direction);
-		setLocation(next);
-	}
+	if(location->getEdges().count(direction) > 0)
+		if (location->getEdge(direction) != nullptr)
+		{
+			Room* next = location->getEdge(direction);
+			setLocation(next);
+			return true;
+		}
+	return false;
 }

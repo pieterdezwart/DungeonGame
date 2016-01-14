@@ -52,6 +52,7 @@ private:
 
 	Room* startRoom = nullptr;
 	void randConnect(int x, int y);
+	string getLegend();
 
 	vector<Enemy*> enemies; // all the enemies in the map
 	vector<Trap*> traps; // all the traps in the map

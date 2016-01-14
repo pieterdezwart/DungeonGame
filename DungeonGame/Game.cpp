@@ -2,6 +2,7 @@
 #include "Trap.h"
 #include "Item.h"
 #include <ctime>
+#include "InputHandler.h"
 
 void Game::init()
 {
@@ -59,20 +60,11 @@ void Game::gameLoop()
 	string input = "";
 	while (playing)
 	{
+		cout << "What do you do\n";
+		cout << InputHandler::getOptions() << "\n";
+
 		cin >> input;
-		//CODE BELOW IS TEMPORARY TO TEST
-		if (input == "move")
-		{
-			cout << "what direction \n";
-			cin >> input;
-			hero->move(input);
-		}
-		if (input == "cls")
-		{
-			system("cls");
-		}
-		getRoom();
-		dungeon->currentMap()->display(hero->getLocation());
+		InputHandler::handleInput(input);
 	}
 
 }
@@ -173,8 +165,8 @@ vector<string> Game::split(string str, char delim)
 	return tokens;
 }
 
-void Game::getRoom() {
-	cout << hero->getLocation()->getDescription();
+string Game::getRoom() {
+	return hero->getLocation()->getDescription();
 }
 
 vector<string> Game::getRoomSizes()
