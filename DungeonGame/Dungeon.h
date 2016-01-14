@@ -11,7 +11,7 @@ public:
 	void generateMap();
 
 	Map* currentMap();
-
+	void setCurrentMap(Map* m) { map = m; };
 private: 
 	Map* map = nullptr;
 };

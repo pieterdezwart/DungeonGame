@@ -1,6 +1,6 @@
 #include "Hero.h"
 #include "Room.h"
-
+#include "Game.h"
 
 Hero::Hero(Room* start)
 {
@@ -33,6 +33,10 @@ bool Hero::move(string direction)
 		{
 			Room* next = location->getEdge(direction);
 			setLocation(next);
+			if (direction == "up" || direction == "down")
+			{
+				Game::getInstance().getDungeon()->setCurrentMap(getLocation()->getMap());
+			}
 			return true;
 		}
 	return false;

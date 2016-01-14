@@ -11,6 +11,9 @@ void InputHandler::handleInput(string input)
 	else if (input == "map")
 	{
 		Game::getInstance().getDungeon()->currentMap()->display(Game::getInstance().getHero()->getLocation());
+	} if (input == "teleport-end")
+	{
+		Game::getInstance().getHero()->setLocation(Game::getInstance().getHero()->getLocation()->getMap()->getExit());
 	}
 }
 

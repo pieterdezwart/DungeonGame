@@ -17,14 +17,17 @@ class Map
 {
 public:
 	Map(int width, int height);
+	Map(int width, int height, Map* prev);
 	~Map();
 
 	void display(Room* heropos);
+	void displayCheat(Room* heropos);
 
-	void generateMap();
+	void generateMap(Room* prevLevel);
 
 
-	Room* getStartRoom();
+	Room* getStartRoom() { return startRoom; };
+	Room* getExit() {return exit; };
 
 	vector<Enemy*> getEnemies() { return enemies; };
 	void addEnemy(Enemy* enemy);
@@ -40,7 +43,7 @@ public:
 	void addItem(Item* item);
 	vector<Item*> getItems(Room* location);
 	bool removeItem(Item* item);
-
+	int getLevel() { return level; };
 private:
 	int max_X, max_Y;
 
@@ -51,11 +54,13 @@ private:
 	char *grid; // grid char array
 
 	Room* startRoom = nullptr;
+	Room* exit = nullptr;
 	void randConnect(int x, int y);
 	string getLegend();
 
 	vector<Enemy*> enemies; // all the enemies in the map
 	vector<Trap*> traps; // all the traps in the map
 	vector<Item*> items; // all the items in the map
+	int level;
 };
 

@@ -8,21 +8,23 @@ Map::Map(int width, int height)
 	for (int i = 0; i < height; ++i)
 		grid2[i].resize(width);
 
-	//cout << grid2[x].size;
+	max_X = width - 1;
+	max_Y = height - 1;
+	generateMap(nullptr);
+	level = 0;
+}
 
-	//grid = new char[width][height];
-
-	//int grid[width][height];
-
-	//Room* grid[10][10];
+Map::Map(int width, int height, Map* prev)
+{
+	// Set up sizes. (HEIGHT x WIDTH)
+	grid2.resize(height);
+	for (int i = 0; i < height; ++i)
+		grid2[i].resize(width);
 
 	max_X = width-1;
 	max_Y = height-1;
-
-	generateMap();
-
-	//randomPaths();
-
+	generateMap(prev->getExit());
+	level = prev->getLevel() + 1;
 }
 
 
@@ -43,11 +45,11 @@ void Map::display(Room* heropos)
 				if (r == heropos)
 					cout << "H";
 				else
-					(r->isExplored()) ? cout<<  r->getType() :  cout<<" ";
+					(r->isExplored()) ? cout << r->getType() : cout << " ";
 				(r->getEdge("east") && (r->isExplored() || r->getEdge("east")->isExplored())) ? cout << "-" : cout << " ";
 			}
 			else
-				cout << "X ";
+				cout << "  ";
 		}
 		cout << endl;
 		for (int j = 0; j <= max_X; j++) {
@@ -79,6 +81,54 @@ void Map::display(Room* heropos)
 	}
 	cout << getLegend();
 }
+void Map::displayCheat(Room* heropos)
+{
+	cout << "\n";
+	for (int i = 0; i <= max_Y; i++) {
+		for (int j = 0; j <= max_X; j++) {
+			Room* r = grid2[i][j];
+			if (r != nullptr) {
+
+				//(grid2[i][j]->getEdge("west")) ? cout << "-" : cout << " "; 
+				if (r == heropos)
+					cout << "H";
+				else
+					cout << r->getType();
+				(r->getEdge("east")) ? cout << "-" : cout << " ";
+			}
+			else
+				cout << "  ";
+		}
+		cout << endl;
+		for (int j = 0; j <= max_X; j++) {
+			Room* r = grid2[i][j];
+			if (r != nullptr) {
+				if (r->getEdge("south"))
+					cout << "| ";
+				else
+				{
+					if (coordsExist(i + 1, j))
+					{
+						Room* r2 = grid2[i + 1][j];
+						if (r2->getEdge("north"))
+						{
+							cout << "| ";
+						}
+						else
+							cout << "  ";
+					}
+					else
+						cout << "  ";
+				}
+				//(grid2[i][j]->getEdge("north")) ? cout << "s" : cout << "  ";
+			}
+			else
+				cout << " ";
+		}
+		cout << endl;
+	}
+	cout << getLegend();
+}
 
 string Map::getLegend()
 {
@@ -87,13 +137,13 @@ string Map::getLegend()
 	ret = ret + ":- : Hallways\n";
 	ret = ret + "S  : Starting location\n";
 	ret = ret + "X  : Room\n";
-	ret = ret + "L  : Stairs down\n";
-	ret = ret + "H  : Stairs up\n";
+	ret = ret + "U  : Stairs down\n";
+	ret = ret + "D  : Stairs up\n";
 	ret = ret + "H  : Hero's location\n";
 	return ret;
 }
 
-void Map::generateMap()
+void Map::generateMap(Room* prevLevel)
 {
 
 	for (int i = 0; i <= max_Y; i++)
@@ -110,11 +160,23 @@ void Map::generateMap()
 		}
 	}
 
+	//
+	exit = new Room(rand() % max_X, rand() % max_Y, this);
+	exit->setType('U'); // declare start room type
+	grid2[exit->getY()][exit->getX()] = exit;
+
 	// select random point and open as start node
 	srand((unsigned)time(0)); // activates the random generator
-	startRoom = new Room(rand() % max_X, rand() % max_Y, this);
-	startRoom->setType('S'); // declare start room type
-	startRoom->setDescription("Dit is de ingang van de kerker. De deur naar buiten is dicht.");
+	if (prevLevel == nullptr)
+	{
+		startRoom = new Room(rand() % max_X, rand() % max_Y, this);
+		startRoom->setType('S'); // declare start room type
+		startRoom->setDescription("Dit is de ingang van de kerker. De deur naar buiten is dicht.");
+	}
+	else {
+		startRoom = new Room(prevLevel->getX(), prevLevel->getY(), this);
+		startRoom->setType('D'); // declare start room type
+	}
 	grid2[startRoom->getY()][startRoom->getX()] = startRoom;
 
 	for (int i = 0; i <= max_Y; i++)
@@ -124,7 +186,12 @@ void Map::generateMap()
 			randConnect(x, i);
 		}
 	}
-	
+
+	if (prevLevel != nullptr)
+	{
+		startRoom->addEdge("down", prevLevel);
+		prevLevel->addEdge("up", startRoom);
+	}
 
 }
 
@@ -155,19 +222,6 @@ void Map::randConnect(int x, int y)
 				}
 			}
 			index = (index < 3) ? index+1 : 0;
-		}
-	}
-}
-
-Room* Map::getStartRoom()
-{
-	for (int i = 0; i <= max_Y; i++)
-	{
-		for (int x = 0; x <= max_X; x++)
-		{
-
-			if (grid2[i][x]->getType() == 'S')
-				return grid2[i][x];
 		}
 	}
 }

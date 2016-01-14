@@ -38,6 +38,7 @@ public:
 	string randFreeEdge();
 	bool isExplored() { return explored; };
 	void setExplored(bool exp) { explored = exp; };
+	Map* getMap() { return map; };
 private:
 	bool explored = false;
 	int x, y = 0;
@@ -54,5 +55,6 @@ private:
 	int distance; // BFS property
 
 	string description = "x";
+	Map* map;
 };
 

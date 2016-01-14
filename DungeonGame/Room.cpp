@@ -2,11 +2,11 @@
 #include "Game.h"
 #include "Map.h"
 
-Room::Room(int x2, int y2, Map* map)
+Room::Room(int x2, int y2, Map* m)
 {
 	description = Game::getInstance().genRoomDescription();
 
-	Game::getInstance().genEnemies(this, map);
+	Game::getInstance().genEnemies(this, m);
 	//Game::getInstance().genTraps(this, map);
 	//Game::getInstance().genItems(this, map);
 
@@ -14,11 +14,14 @@ Room::Room(int x2, int y2, Map* map)
 	edges["east"] = nullptr;
 	edges["south"] = nullptr;
 	edges["west"] = nullptr;
+	edges["up"] = nullptr;
+	edges["down"] = nullptr;
 
 	x = x2;
 	y = y2;
 
 	//parent = r;
+	map = m;
 }
 
 
@@ -79,7 +82,7 @@ string Room::randFreeEdge()
 
 int Room::numEdges()
 {
-	int ret = 0;
+	int ret = -2;
 	for (auto const& kv : edges)
 	{
 		if (kv.second != nullptr)
