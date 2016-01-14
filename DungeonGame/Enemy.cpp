@@ -1,10 +1,12 @@
 #include "Enemy.h"
 #include <iostream>
 
-Enemy::Enemy(const Enemy &obj)
-{
-	std::cout << "Copy constructor allocating ptr." << std::endl;
-}
+//Enemy::Enemy(const Enemy & obj)
+//{
+//	std::cout << "Copy constructor allocating ptr." << std::endl;
+//
+//	name = "test";
+//}
 
 Enemy::~Enemy()
 {

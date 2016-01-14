@@ -6,10 +6,6 @@ Room::Room(int x2, int y2, Map* m)
 {
 	description = Game::getInstance().genRoomDescription();
 
-	Game::getInstance().genEnemies(this, m);
-	//Game::getInstance().genTraps(this, map);
-	//Game::getInstance().genItems(this, map);
-
 	edges["north"] = nullptr;
 	edges["east"] = nullptr;
 	edges["south"] = nullptr;
@@ -22,6 +18,10 @@ Room::Room(int x2, int y2, Map* m)
 
 	//parent = r;
 	map = m;
+
+	Game::getInstance().genEnemies(this, m);
+	Game::getInstance().genTraps(this, m);
+	Game::getInstance().genItems(this, m);
 }
 
 

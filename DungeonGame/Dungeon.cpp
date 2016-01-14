@@ -10,6 +10,8 @@ Dungeon::Dungeon()
 	{
 		prevMap = new Map(10, 10, prevMap);
 	}
+
+	//map->generateEnemies();
 }
 
 

@@ -8,7 +8,7 @@ class Item
 public:
 	Item(std::string n, int a, int d, int h) : name(n), attack(a), defense(d), health(h) {};
 
-	Item(const Item &obj);  // copy constructor
+	//Item(const Item &obj);  // copy constructor
 
 	~Item();
 

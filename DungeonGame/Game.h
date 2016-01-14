@@ -47,6 +47,8 @@ public:
 	Hero* getHero() { return hero; };
 	Dungeon* getDungeon() { return dungeon; };
 
+	vector<Enemy*> getEnemies() { return enemies; }
+
 private:
 	// Private constructor
 	Game() {};

@@ -49,7 +49,21 @@ void Game::init()
 
 	for (Enemy* enemy : enemies2)
 	{
-		cout << enemy->getName() << endl;
+		cout << enemy->getName() << ", Room: " << enemy->getLocation()->getX() << "," << enemy->getLocation()->getY() << endl;
+	}
+
+	vector<Trap*> traps2 = dungeon->currentMap()->getTraps();
+
+	for (Trap* trap : traps2)
+	{
+		cout << trap->getName() << ", Room: " << trap->getLocation()->getX() << "," << trap->getLocation()->getY() << endl;
+	}
+
+	vector<Item*> items2 = dungeon->currentMap()->getItems();
+
+	for (Item* item : items2)
+	{
+		cout << item->getName() << ", Room: " << item->getLocation()->getX() << "," << item->getLocation()->getY() << endl;
 	}
 }
 
@@ -247,7 +261,8 @@ void Game::genEnemies(Room* location, Map* m)
 		// pick a random type for each enemy
 		for (int i = 0; i < roll; i++)
 		{
-			Enemy* enemy = enemies.at(rand() % (enemies.size() - 1));
+			// copy the object and create new pointer to object
+			Enemy* enemy = new Enemy(*enemies.at(rand() % (enemies.size() - 1)));
 			enemy->setLocation(location);
 
 			//dungeon->currentMap()->display();
@@ -267,7 +282,8 @@ void Game::genTraps(Room* location, Map* m)
 
 	if (roll > 90)
 	{
-		Trap* trap = traps.at(rand() % (traps.size() - 1));
+		// copy the object and create new pointer to object
+		Trap* trap = new Trap(*traps.at(rand() % (traps.size() - 1)));
 		trap->setLocation(location);
 
 		//dungeon->currentMap()->addTrap(trap);
@@ -284,13 +300,14 @@ void Game::genItems(Room* location, Map* m)
 
 	if (roll >= 95)
 	{
-		Item* item = items.at(rand() % (items.size() - 1));
+		// copy the object and create new pointer to object
+		Item* item = new Item(*items.at(rand() % (items.size() - 1)));
 		item->setLocation(location);
 
 		//dungeon->currentMap()->addItem(item);
 		m->addItem(item);
 
-		delete item;
+		//delete item;
 
 	}
 }

@@ -8,7 +8,7 @@ class Trap
 public:
 	Trap(std::string n, int a) : name(n), attack(a) {};
 
-	Trap(const Trap &obj);  // copy constructor
+	//Trap(const Trap &obj);  // copy constructor
 
 	~Trap();
 

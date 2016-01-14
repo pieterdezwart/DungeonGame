@@ -8,7 +8,9 @@ class Enemy
 public:
 	Enemy(std::string n, int a, int h, int e, int l) : name(n), attack(a), health(h), experience(e), level(l) {};
 
-	Enemy(const Enemy &obj);  // copy constructor
+	//Enemy(const Enemy& obj);  // copy constructor
+
+	//Enemy& operator=(const Enemy& obj) {};
 
 	~Enemy();
 

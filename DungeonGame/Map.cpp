@@ -1,5 +1,5 @@
 #include "Map.h"
-
+#include "Game.h"
 
 Map::Map(int width, int height)
 {
