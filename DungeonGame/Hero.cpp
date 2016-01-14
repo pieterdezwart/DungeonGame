@@ -23,7 +23,7 @@ void Hero::look()
 
 void Hero::search()
 {
-
+	addPerception(1);
 }
 
 bool Hero::move(string direction)
@@ -32,6 +32,7 @@ bool Hero::move(string direction)
 		if (location->getEdge(direction) != nullptr)
 		{
 			Room* next = location->getEdge(direction);
+			if (!next->isExplored()) addPerception(1);
 			setLocation(next);
 			if (direction == "up" || direction == "down")
 			{
