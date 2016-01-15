@@ -1,10 +1,12 @@
 #include "InputHandler.h"
 #include "Game.h"
 #include <string>
+#include "FightState.h"
 
 void InputHandler::handleInput()
 {
-	cin >> input;
+	std::cout << "Action: "; 
+	std::cin >> input;
 
 	if (input == "move")
 	{
@@ -20,7 +22,7 @@ void InputHandler::handleInput()
 	}
 	if (input == "attack")
 	{
-		Game::getInstance().getHero()->setFighting(true);
+		Game::getInstance().getFSM()->changeState(new FightState());
 	}
 	else
 	{

@@ -52,6 +52,10 @@ public:
 
 	vector<Enemy*> getEnemies() { return enemies; }
 
+	void displayHeader();
+
+	GameStateMachine* getFSM() { return gameStateMachine; }
+
 private:
 	// Private constructor
 	Game() {};
@@ -81,5 +85,6 @@ private:
 	vector<string> Game::split(string str, char delim);
 
 	GameStateMachine* gameStateMachine;
+
 };
 

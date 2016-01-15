@@ -35,11 +35,6 @@ void Game::init()
 		cout << item->getName() << ", " << item->getAttack() << endl;
 	}
 
-	cout << endl;
-	cout << "=============================================" << endl;
-	cout << "=		DUNGEON GAME		=" << endl;
-	cout << "=============================================" << endl;
-
 	dungeon = new Dungeon();
 
 	Room* startRoom = dungeon->currentMap()->getStartRoom();
@@ -78,12 +73,13 @@ void Game::gameLoop()
 	string input = "";
 	while (playing)
 	{
-		//cout << "What do you do\n";
-		//cout << InputHandler::getOptions() << "\n";
+		system("cls"); // clear the screen
+
+		displayHeader();
+
 		update();
 		view();
 
-		//cin >> input;
 		InputHandler::getInstance().handleInput();
 	}
 
@@ -326,4 +322,12 @@ void Game::genItems(Room* location, Map* m)
 		//delete item;
 
 	}
+}
+
+void Game::displayHeader()
+{
+	cout << "=============================================" << endl;
+	cout << "=		DUNGEON GAME		=" << endl;
+	cout << "=============================================" << endl;
+	cout << endl;
 }
