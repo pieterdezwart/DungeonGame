@@ -45,26 +45,26 @@ void Game::init()
 
 	hero = new Hero(startRoom);
 
-	vector<Enemy*> enemies2 = dungeon->currentMap()->getEnemies();
+	//vector<Enemy*> enemies2 = dungeon->currentMap()->getEnemies();
 
-	for (Enemy* enemy : enemies2)
-	{
-		cout << enemy->getName() << ", Room: " << enemy->getLocation()->getX() << "," << enemy->getLocation()->getY() << endl;
-	}
+	//for (Enemy* enemy : enemies2)
+	//{
+	//	cout << enemy->getName() << ", Room: " << enemy->getLocation()->getX() << "," << enemy->getLocation()->getY() << endl;
+	//}
 
-	vector<Trap*> traps2 = dungeon->currentMap()->getTraps();
+	//vector<Trap*> traps2 = dungeon->currentMap()->getTraps();
 
-	for (Trap* trap : traps2)
-	{
-		cout << trap->getName() << ", Room: " << trap->getLocation()->getX() << "," << trap->getLocation()->getY() << endl;
-	}
+	//for (Trap* trap : traps2)
+	//{
+	//	cout << trap->getName() << ", Room: " << trap->getLocation()->getX() << "," << trap->getLocation()->getY() << endl;
+	//}
 
-	vector<Item*> items2 = dungeon->currentMap()->getItems();
+	//vector<Item*> items2 = dungeon->currentMap()->getItems();
 
-	for (Item* item : items2)
-	{
-		cout << item->getName() << ", Room: " << item->getLocation()->getX() << "," << item->getLocation()->getY() << endl;
-	}
+	//for (Item* item : items2)
+	//{
+	//	cout << item->getName() << ", Room: " << item->getLocation()->getX() << "," << item->getLocation()->getY() << endl;
+	//}
 }
 
 void Game::gameLoop()

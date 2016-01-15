@@ -114,3 +114,18 @@ string Room::getExitStrings()
 	}
 	return ret;
 }
+
+vector<Enemy*> Room::getEnemies()
+{
+	vector<Enemy*> roomEnemies;
+
+	for (Enemy* enemy : Game::getInstance().getDungeon()->currentMap()->getEnemies())
+	{
+		if (this == enemy->getLocation())
+		{
+			roomEnemies.push_back(enemy);
+		}
+	}
+
+	return roomEnemies;
+}

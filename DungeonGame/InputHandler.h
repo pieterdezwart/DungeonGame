@@ -10,5 +10,7 @@ public:
 	static string moveDirections();
 private:
 	static void move();
+
+	static bool fighting;
 };
 

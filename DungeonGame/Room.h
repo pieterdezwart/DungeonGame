@@ -2,10 +2,12 @@
 #include <string>
 #include <map>
 #include <iostream>
+#include <vector>
 
 using namespace std;
 
 class Map;
+class Enemy;
 
 class Room
 {
@@ -39,6 +41,8 @@ public:
 	bool isExplored() { return explored; };
 	void setExplored(bool exp) { explored = exp; };
 	Map* getMap() { return map; };
+
+	vector<Enemy*> getEnemies();
 private:
 	bool explored = false;
 	int x, y = 0;

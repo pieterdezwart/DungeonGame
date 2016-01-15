@@ -8,19 +8,31 @@ void InputHandler::handleInput(string input)
 	{
 		InputHandler::move();
 	}
-	else if (input == "map")
+	if (input == "map")
 	{
 		Game::getInstance().getDungeon()->currentMap()->display(Game::getInstance().getHero()->getLocation());
-	} if (input == "teleport-end")
+	} 
+	if (input == "teleport-end")
 	{
 		Game::getInstance().getHero()->setLocation(Game::getInstance().getHero()->getLocation()->getMap()->getExit());
+	}
+	if (input == "attack")
+	{
+		Game::getInstance().getHero()->setFighting(true);
 	}
 }
 
 string InputHandler::getOptions()
 {
-	bool fighting = false;
-	return (fighting) ? "[attack:flee:potion:item]" : "[look:search:rest:inventory:map:stats:move]";
+	if (Game::getInstance().getHero()->getFighting()) {
+		return "[attack:flee:potion:item]";
+	}
+	else if (Game::getInstance().getHero()->getLocation()->getEnemies().size() > 0)
+	{
+		return "[attack:flee:search:inventory:map:stats]";
+	}
+	else
+	 return "[look:search:rest:inventory:map:stats:move]";
 }
 
 string InputHandler::moveDirections()

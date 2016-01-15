@@ -15,6 +15,9 @@ public:
 	void search();
 	bool move(string direction);
 	void addPerception(int xp) { perception += xp; };
+
+	bool getFighting() { return fighting; }
+	void setFighting(bool b) { fighting = b; }
 private:
 	int x, y = 0;
 	Room* currentRoom = nullptr; // current location of the hero
@@ -25,5 +28,7 @@ private:
 
 	//stats
 	int perception = 0;
+
+	bool fighting = false;
 };
 
