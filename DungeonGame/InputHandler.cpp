@@ -2,8 +2,10 @@
 #include "Game.h"
 #include <string>
 
-void InputHandler::handleInput(string input)
+void InputHandler::handleInput()
 {
+	cin >> input;
+
 	if (input == "move")
 	{
 		InputHandler::move();
@@ -19,6 +21,10 @@ void InputHandler::handleInput(string input)
 	if (input == "attack")
 	{
 		Game::getInstance().getHero()->setFighting(true);
+	}
+	else
+	{
+		cout << "Input not allowed" << endl;
 	}
 }
 

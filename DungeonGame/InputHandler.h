@@ -5,12 +5,29 @@
 class InputHandler
 {
 public:
-	static void handleInput(string input);
-	static string getOptions();
-	static string moveDirections();
-private:
-	static void move();
+	static InputHandler& getInstance()
+	{
+		/* The only instance, guaranteed to be lazy initialized,
+		guaranteed that it will be destroyed correctly */
+		static InputHandler instance;
+		return instance;
+	}
 
-	static bool fighting;
+	void handleInput();
+	string getOptions();
+	string moveDirections();
+private:
+	// Private constructor
+	InputHandler() {};
+
+	// Stop the compiler generating methods of copy the object
+	InputHandler(InputHandler const&) = delete;
+	void operator=(InputHandler const&) = delete;
+
+	void move();
+
+	bool fighting;
+
+	std::string input;
 };
 

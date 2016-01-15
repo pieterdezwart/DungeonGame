@@ -7,6 +7,7 @@
 #include "Dungeon.h"
 #include "Enemy.h"
 #include "Hero.h"
+#include "GameStateMachine.h"
 
 using namespace std;
 
@@ -26,6 +27,8 @@ public:
 
 	void init();
 	void gameLoop();
+	void update();
+	void view();
 
 	string getRoom();
 
@@ -76,5 +79,7 @@ private:
 	void loadItemFile(string file);
 
 	vector<string> Game::split(string str, char delim);
+
+	GameStateMachine* gameStateMachine;
 };
 

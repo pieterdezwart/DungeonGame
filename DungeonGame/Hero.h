@@ -8,7 +8,7 @@ public:
 	Hero(Room* start);
 	~Hero();
 
-	void setLocation(Room* room) { location = room; x = room->getX(); y = room->getY(); room->setExplored(true); look(); };
+	void setLocation(Room* room) { location = room; x = room->getX(); y = room->getY(); room->setExplored(true); };
 	Room* getLocation() { return location; };
 
 	void look();

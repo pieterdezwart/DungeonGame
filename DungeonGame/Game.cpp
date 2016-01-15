@@ -3,6 +3,7 @@
 #include "Item.h"
 #include <ctime>
 #include "InputHandler.h"
+#include "ExploreState.h"
 
 void Game::init()
 {
@@ -45,6 +46,9 @@ void Game::init()
 
 	hero = new Hero(startRoom);
 
+	gameStateMachine = new GameStateMachine();
+	gameStateMachine->changeState(new ExploreState());
+
 	//vector<Enemy*> enemies2 = dungeon->currentMap()->getEnemies();
 
 	//for (Enemy* enemy : enemies2)
@@ -74,13 +78,25 @@ void Game::gameLoop()
 	string input = "";
 	while (playing)
 	{
-		cout << "What do you do\n";
-		cout << InputHandler::getOptions() << "\n";
+		//cout << "What do you do\n";
+		//cout << InputHandler::getOptions() << "\n";
+		update();
+		view();
 
-		cin >> input;
-		InputHandler::handleInput(input);
+		//cin >> input;
+		InputHandler::getInstance().handleInput();
 	}
 
+}
+
+void Game::update()
+{
+	gameStateMachine->update();
+}
+
+void Game::view()
+{
+	gameStateMachine->view();
 }
 
 void Game::loadRoomFile(string file)
