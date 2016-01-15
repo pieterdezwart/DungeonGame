@@ -18,6 +18,7 @@ public:
 	void addPerception(int xp) { perception += xp; };
 	int getHealth() { return health; }
 	int getMaxHealth() { return maxHealth; }
+	void setHealth(int h) { health = h; }
 
 private:
 	int x, y = 0;

@@ -6,11 +6,26 @@ const std::string FightState::stateID = "FIGHT";
 
 void FightState::update()
 {
+	// TODO: hero attacks an enemy picked from list
+
+	// TODO: enemies should not attack on entering fight state
+
+	int attack = 0;
+
 	for (Enemy* enemy : Game::getInstance().getHero()->getLocation()->getEnemies())
 	{
-		std::cout << enemy->getName() << ": ";
-		std::cout << enemy->getHealth() << " of " << "MaxHealth\n";
+		// temp attack state
+		// TODO: every enemy attacks and does an attack roll, save all actions in list for display
+
+		attack += enemy->getAttack();
 	}
+
+	int health = Game::getInstance().getHero()->getHealth();
+
+	health = health - attack;
+
+
+	Game::getInstance().getHero()->setHealth(health);
 }
 
 void FightState::view()

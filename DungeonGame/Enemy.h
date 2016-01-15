@@ -17,6 +17,8 @@ public:
 	void setLocation(Room* room) { location = room; };
 	Room* getLocation() { return location; };
 
+	void move();
+
 	void setName(std::string value);
 
 	void setAttack(int value);

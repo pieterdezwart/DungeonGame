@@ -12,6 +12,11 @@ Enemy::~Enemy()
 {
 }
 
+void Enemy::move()
+{
+	
+}
+
 void Enemy::setName(std::string value)
 {
 	name = value;
