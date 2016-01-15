@@ -32,10 +32,7 @@ void InputHandler::handleInput()
 
 string InputHandler::getOptions()
 {
-	if (Game::getInstance().getHero()->getFighting()) {
-		return "[attack:flee:potion:item]";
-	}
-	else if (Game::getInstance().getHero()->getLocation()->getEnemies().size() > 0)
+	if (Game::getInstance().getHero()->getLocation()->getEnemies().size() > 0)
 	{
 		return "[attack:flee:search:inventory:map:stats]";
 	}

@@ -14,21 +14,21 @@ public:
 	void look();
 	void search();
 	bool move(string direction);
+	
 	void addPerception(int xp) { perception += xp; };
+	int getHealth() { return health; }
+	int getMaxHealth() { return maxHealth; }
 
-	bool getFighting() { return fighting; }
-	void setFighting(bool b) { fighting = b; }
 private:
 	int x, y = 0;
 	Room* currentRoom = nullptr; // current location of the hero
-
-	int health = 50;
 
 	Room* location = nullptr;
 
 	//stats
 	int perception = 0;
+	int health = 50;
+	int maxHealth = 50;
 
-	bool fighting = false;
 };
 
