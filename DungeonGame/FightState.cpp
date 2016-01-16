@@ -2,25 +2,27 @@
 #include <iostream>
 #include "Game.h"
 #include "EnemyStates.h"
+#include "ExploreState.h"
 
 const std::string FightState::stateID = "FIGHT";
 
 void FightState::update()
 {
-	// TODO: hero attacks an enemy picked from list
-
 	// TODO: enemies should not attack on entering fight state
 
 	if (enemyAttack)
 	{
 		int attack = 0;
 
-		for (Enemy* enemy : Game::getInstance().getHero()->getLocation()->getEnemies())
+		for (auto enemy : enemyList)
 		{
 			// temp attack state
 			// TODO: every enemy attacks and does an attack roll, save all actions in list for display
 
-			attack += enemy->getAttack();
+			attack += enemy.second->getAttack();
+
+			enemiesResult += enemy.first + " attacks and does ";
+			enemiesResult += std::to_string(enemy.second->getAttack()) + " damage.\n";
 		}
 
 		int health = Game::getInstance().getHero()->getHealth();
@@ -29,6 +31,11 @@ void FightState::update()
 
 
 		Game::getInstance().getHero()->setHealth(health);
+	}
+
+	if (enemyList.size() == 0)
+	{
+		Game::getInstance().getFSM()->changeState(new ExploreState());
 	}
 
 }
@@ -49,7 +56,7 @@ void FightState::view()
 	if (enemyAttack)
 	{
 		std::cout << "Actions hero:\n";
-		std::cout << heroResult << std::endl;
+		std::cout << heroResult << std::endl << std::endl;
 
 		std::cout << "Actions enemies:\n";
 		std::cout << enemiesResult << std::endl;
@@ -62,6 +69,9 @@ void FightState::view()
 	std::cout << "[attack:flee:potion:item]\n\n";
 
 	enemyAttack = true; // enable enemy attacks after entering
+
+	enemiesResult = "";
+	heroResult = "";
 }
 
 void FightState::pickEnemy()
@@ -86,8 +96,6 @@ void FightState::pickEnemy()
 
 void FightState::result(std::string input)
 {
-	enemiesResult = "";
-	heroResult = "";
 
 	// hero attacks
 	int eHealth = enemyList.at(input)->getHealth();
@@ -100,6 +108,7 @@ void FightState::result(std::string input)
 	{
 		heroResult = "You killed " + input;
 		delete enemyList.at(input);
+		enemyList.erase(input);
 	}
 	else
 	{
