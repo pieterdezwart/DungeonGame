@@ -2,11 +2,12 @@
 #include <string>
 
 class Room;
+class GameStateMachine;
 
 class Enemy
 {
 public:
-	Enemy(std::string n, int a, int h, int e, int l) : name(n), attack(a), health(h), experience(e), level(l) {};
+	Enemy(std::string n, int a, int h, int e, int l);
 
 	//Enemy(const Enemy& obj);  // copy constructor
 
@@ -32,14 +33,19 @@ public:
 	int getAttack();
 	int getDefense();
 	int getHealth();
+	int getMaxHealth() { return maxHealth; };
 	int getExperience();
 	int getLevel();
+
+	GameStateMachine* getFSM() { return stateMachine; }
 
 private:
 	Room* location = nullptr;
 
 	std::string name;
 
-	int attack, defense, health, experience, level = 0;
+	int attack, defense, health, experience, level, maxHealth = 0;
+
+	GameStateMachine* stateMachine;
 };
 

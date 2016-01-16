@@ -1,5 +1,7 @@
 #include "Enemy.h"
 #include <iostream>
+#include "GameStateMachine.h"
+#include "EnemyStates.h"
 
 //Enemy::Enemy(const Enemy & obj)
 //{
@@ -7,6 +9,14 @@
 //
 //	name = "test";
 //}
+
+Enemy::Enemy(std::string n, int a, int h, int e, int l) : name(n), attack(a), health(h), experience(e), level(l)
+{
+	stateMachine = new GameStateMachine();
+	stateMachine->changeState(new IdleState());
+
+	maxHealth = health;
+}
 
 Enemy::~Enemy()
 {

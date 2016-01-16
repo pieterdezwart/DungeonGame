@@ -148,6 +148,7 @@
   <ItemGroup>
     <ClCompile Include="Dungeon.cpp" />
     <ClCompile Include="Enemy.cpp" />
+    <ClCompile Include="EnemyStates.cpp" />
     <ClCompile Include="ExploreState.cpp" />
     <ClCompile Include="FightState.cpp" />
     <ClCompile Include="Game.cpp" />
@@ -163,6 +164,7 @@
   <ItemGroup>
     <ClInclude Include="Dungeon.h" />
     <ClInclude Include="Enemy.h" />
+    <ClInclude Include="EnemyStates.h" />
     <ClInclude Include="ExploreState.h" />
     <ClInclude Include="FightState.h" />
     <ClInclude Include="Game.h" />

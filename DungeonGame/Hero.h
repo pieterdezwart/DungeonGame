@@ -19,6 +19,8 @@ public:
 	int getHealth() { return health; }
 	int getMaxHealth() { return maxHealth; }
 	void setHealth(int h) { health = h; }
+	int getAttack() { return attack; }
+	void setAttack(int a) { attack = a; }
 
 private:
 	int x, y = 0;
@@ -30,6 +32,8 @@ private:
 	int perception = 0;
 	int health = 50;
 	int maxHealth = 50;
+	int attack = 1;
+	int level = 1;
 
 };
 

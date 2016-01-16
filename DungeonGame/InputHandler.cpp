@@ -22,7 +22,12 @@ void InputHandler::handleInput()
 	}
 	if (input == "attack")
 	{
-		Game::getInstance().getFSM()->changeState(new FightState());
+		if (Game::getInstance().getFSM()->currentState()->getStateID() != "FIGHT")
+			Game::getInstance().getFSM()->changeState(new FightState());
+		else
+			dynamic_cast<FightState*>(Game::getInstance().getFSM()->currentState())->pickEnemy();
+
+			
 	}
 	else
 	{

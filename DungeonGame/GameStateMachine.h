@@ -12,6 +12,8 @@ public:
 	void update();
 	void view();
 
+	GameState* currentState() { return gameStates.back(); }
+
 private:
 	std::vector<GameState*> gameStates;
 };
