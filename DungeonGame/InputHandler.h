@@ -25,7 +25,7 @@ private:
 	void operator=(InputHandler const&) = delete;
 
 	void move();
-
+	void block();
 	bool fighting;
 
 	std::string input;

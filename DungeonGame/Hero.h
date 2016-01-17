@@ -21,7 +21,7 @@ public:
 	void setHealth(int h) { health = h; }
 	int getAttack() { return attack; }
 	void setAttack(int a) { attack = a; }
-
+	void printStats();
 private:
 	int x, y = 0;
 	Room* currentRoom = nullptr; // current location of the hero

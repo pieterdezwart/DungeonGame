@@ -71,3 +71,11 @@ bool Hero::move(string direction)
 		}
 	return false;
 }
+
+void Hero::printStats()
+{
+	cout << "Hero's stats:\n";
+	cout << "Health: \t" << health << "\n";
+	cout << "Attack: \t" << attack << "\n";
+	cout << "Perception: \t" << perception << "\n";
+}

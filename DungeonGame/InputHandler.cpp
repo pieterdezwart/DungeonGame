@@ -15,8 +15,7 @@ bool InputHandler::handleInput()
 	if (input == "map")
 	{
 		Game::getInstance().getDungeon()->currentMap()->display(Game::getInstance().getHero()->getLocation());
-		cout << "enter continue to continue playing\n";
-		cin >> input;
+		InputHandler::block();
 	} 
 	if (input == "teleport-end")
 	{
@@ -30,6 +29,11 @@ bool InputHandler::handleInput()
 			dynamic_cast<FightState*>(Game::getInstance().getFSM()->currentState())->pickEnemy();
 
 			
+	}
+	if (input == "stats")
+	{
+		Game::getInstance().getHero()->printStats();
+		InputHandler::block();
 	}
 	else
 	{
@@ -76,4 +80,10 @@ void InputHandler::move()
 	}
 	//system("cls");
 	//cout << Game::getInstance().getRoom() << "\n"; //print room description
+}
+
+void InputHandler::block()
+{
+	cout << "enter continue to continue playing\n";
+	cin >> input;
 }
