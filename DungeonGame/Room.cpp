@@ -129,3 +129,18 @@ vector<Enemy*> Room::getEnemies()
 
 	return roomEnemies;
 }
+
+vector<Trap*> Room::getTraps()
+{
+	vector<Trap*> roomTraps;
+
+	for (Trap* trap : Game::getInstance().getDungeon()->currentMap()->getTraps())
+	{
+		if (this == trap->getLocation())
+		{
+			roomTraps.push_back(trap);
+		}
+	}
+
+	return roomTraps;
+}

@@ -69,18 +69,18 @@ void Game::init()
 void Game::gameLoop()
 {
 	bool playing = true;
-
+	bool clear = true;
 	string input = "";
 	while (playing)
 	{
-		system("cls"); // clear the screen
+		if(clear) system("cls"); // clear the screen
 
 		displayHeader();
-
+		displayMessage();
 		update();
 		view();
 
-		InputHandler::getInstance().handleInput();
+		clear = InputHandler::getInstance().handleInput();
 	}
 
 }
@@ -330,4 +330,13 @@ void Game::displayHeader()
 	cout << "=		DUNGEON GAME		=" << endl;
 	cout << "=============================================" << endl;
 	cout << endl;
+}
+
+void Game::displayMessage()
+{
+	if (message != "")
+	{
+		cout << message;
+	}
+	message = "";
 }

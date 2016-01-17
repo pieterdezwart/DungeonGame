@@ -55,7 +55,8 @@ public:
 	void displayHeader();
 
 	GameStateMachine* getFSM() { return gameStateMachine; }
-
+	void setMessage(string msg) { message = msg;};
+	void Game::displayMessage();
 private:
 	// Private constructor
 	Game() {};
@@ -85,6 +86,8 @@ private:
 	vector<string> Game::split(string str, char delim);
 
 	GameStateMachine* gameStateMachine;
+
+	string message = "";
 
 };
 

@@ -13,7 +13,7 @@ public:
 		return instance;
 	}
 
-	void handleInput();
+	bool handleInput();
 	string getOptions();
 	string moveDirections();
 private:

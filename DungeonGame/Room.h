@@ -8,6 +8,7 @@ using namespace std;
 
 class Map;
 class Enemy;
+class Trap;
 
 class Room
 {
@@ -43,6 +44,7 @@ public:
 	Map* getMap() { return map; };
 
 	vector<Enemy*> getEnemies();
+	vector<Trap*> getTraps();
 private:
 	bool explored = false;
 	int x, y = 0;

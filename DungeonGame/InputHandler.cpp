@@ -3,7 +3,7 @@
 #include <string>
 #include "FightState.h"
 
-void InputHandler::handleInput()
+bool InputHandler::handleInput()
 {
 	std::cout << "Action: "; 
 	std::cin >> input;
@@ -15,6 +15,8 @@ void InputHandler::handleInput()
 	if (input == "map")
 	{
 		Game::getInstance().getDungeon()->currentMap()->display(Game::getInstance().getHero()->getLocation());
+		cout << "enter continue to continue playing\n";
+		cin >> input;
 	} 
 	if (input == "teleport-end")
 	{
@@ -33,6 +35,7 @@ void InputHandler::handleInput()
 	{
 		cout << "Input not allowed" << endl;
 	}
+	return true;
 }
 
 string InputHandler::getOptions()
@@ -71,6 +74,6 @@ void InputHandler::move()
 		cout << "You run in to a wall, try again \n";
 		move();
 	}
-	system("cls");
-	cout << Game::getInstance().getRoom() << "\n"; //print room description
+	//system("cls");
+	//cout << Game::getInstance().getRoom() << "\n"; //print room description
 }

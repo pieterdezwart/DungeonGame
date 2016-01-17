@@ -17,10 +17,11 @@ public:
 
 	std::string getName() { return name; }
 	int getAttack() { return attack; }
-
+	void disable() { canAttack = false; };
+	bool enabled() { return canAttack; };
 private:
 	Room* location = nullptr;
-
+	bool canAttack = true;
 	std::string name;
 	int attack = 0;
 };
