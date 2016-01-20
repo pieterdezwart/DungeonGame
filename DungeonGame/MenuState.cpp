@@ -12,11 +12,11 @@ void MenuState::update()
 void MenuState::view()
 {
 	/*  options:
-		[create new hero]
+		[new hero]
 		[load hero]
 		[delete hero]
-		[start game]
-		[continue game] -> if hero is loaded
+		[new game]
+		//[continue game] -> if hero is loaded
 	*/
 
 }

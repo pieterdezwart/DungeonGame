@@ -2,20 +2,28 @@
 #include "Trap.h"
 #include "Item.h"
 #include <ctime>
+
+#include "FileLoader.h"
 #include "InputHandler.h"
 #include "ExploreState.h"
+#include "MenuState.h"
+
 
 void Game::init()
 {
 	srand(time(NULL)); // random number seed
 
-	loadRoomFile("room.txt");
+	//loadHeroFile("hero.txt");
 
-	loadEnemiesFile("enemy.txt");
+	//loadRoomFile("room.txt");
 
-	loadTrapFile("trap.txt");
+	FileLoader* fileLoader = new FileLoader();
 
-	loadItemFile("item.txt");
+	//loadEnemiesFile("Resources/enemy.txt");
+
+	//loadTrapFile("Resources/trap.txt");
+
+	//loadItemFile("Resources/item.txt");
 
 	// test enemies
 	for (Enemy* enemy : enemies)
@@ -95,101 +103,7 @@ void Game::view()
 	gameStateMachine->view();
 }
 
-void Game::loadRoomFile(string file)
-{
-	ifstream input_file{ file };
 
-	string line;
-
-	int count = 1;
-
-	while (getline(input_file, line))
-	{
-		if (count == 1)
-			roomSize = split(line, ',');
-		if (count == 2)
-			roomState = split(line, ',');
-		if (count == 3)
-			roomProperties = split(line, ',');
-		if (count == 4)
-			roomLight = split(line, ',');
-
-		count++;
-	}
-
-	for (string s : roomSize)
-	{
-		//cout << s << endl;
-	}
-}
-
-void Game::loadEnemiesFile(string file)
-{
-	ifstream input_file{ file };
-
-	string line;
-
-	// for each new line in enemy.txt create a new enemy object
-	while (getline(input_file, line))
-	{
-		vector<string> enemyProperties = split(line, ',');
-
-		//cout << enemyProperties[0] << endl;
-
-		enemies.push_back(new Enemy(enemyProperties.at(0), std::stoi(enemyProperties.at(1)), std::stoi(enemyProperties.at(2)), std::stoi(enemyProperties.at(3)), 1));
-
-	}
-}
-
-void Game::loadTrapFile(string file)
-{
-	ifstream input_file{ file };
-
-	string line;
-
-	// for each new line in enemy.txt create a new enemy object
-	while (getline(input_file, line))
-	{
-		vector<string> trapProperties = split(line, ',');
-
-		//cout << enemyProperties[0] << endl;
-
-		traps.push_back(new Trap(trapProperties.at(0), std::stoi(trapProperties.at(1))));
-
-	}
-}
-
-void Game::loadItemFile(string file)
-{
-	ifstream input_file{ file };
-
-	string line;
-
-	// for each new line in enemy.txt create a new enemy object
-	while (getline(input_file, line))
-	{
-		vector<string> trapProperties = split(line, ',');
-
-		//cout << enemyProperties[0] << endl;
-
-		items.push_back(new Item(trapProperties.at(0), std::stoi(trapProperties.at(1)), std::stoi(trapProperties.at(2)), std::stoi(trapProperties.at(3))));
-
-	}
-}
-
-// split a string in string tokens by delimiter
-vector<string> Game::split(string str, char delim)
-{
-	vector<string> tokens;
-	stringstream ss(str);
-	string item;
-
-	while (getline(ss, item, delim)) {
-		tokens.push_back(item);
-	}
-
-	return tokens;
-}
 
 string Game::getRoom() {
 	return hero->getLocation()->getDescription();

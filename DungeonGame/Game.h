@@ -32,6 +32,15 @@ public:
 
 	string getRoom();
 
+	void addRoomSize(std::string token) { roomSize.push_back(token); };
+	void addRoomState(std::string token) { roomState.push_back(token); };
+	void addRoomProperties(std::string token) { roomProperties.push_back(token); };
+	void addRoomLight(std::string token) { roomLight.push_back(token); };
+
+	void addEnemy(Enemy* enemy) { enemies.push_back(enemy); };
+	void addTrap(Trap* trap) { traps.push_back(trap); };
+	void addItem(Item* item) { items.push_back(item); };
+
 	vector<string> getRoomSizes();
 	vector<string> getRoomStates();
 	vector<string> getRoomProperties();
@@ -74,16 +83,6 @@ private:
 	Dungeon* dungeon = nullptr;
 
 	Hero* hero = nullptr;
-
-	void loadRoomFile(string file);
-
-	void loadEnemiesFile(string file);
-
-	void loadTrapFile(string file);
-
-	void loadItemFile(string file);
-
-	vector<string> Game::split(string str, char delim);
 
 	GameStateMachine* gameStateMachine;
 

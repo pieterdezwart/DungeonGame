@@ -1,0 +1,8 @@
+name:
+level:
+health:
+experience:
+attack:
+defense:
+perception:
+items: 

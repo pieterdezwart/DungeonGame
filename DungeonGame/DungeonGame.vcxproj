@@ -151,6 +151,7 @@
     <ClCompile Include="EnemyStates.cpp" />
     <ClCompile Include="ExploreState.cpp" />
     <ClCompile Include="FightState.cpp" />
+    <ClCompile Include="FileLoader.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameStateMachine.cpp" />
     <ClCompile Include="Hero.cpp" />
@@ -168,6 +169,7 @@
     <ClInclude Include="EnemyStates.h" />
     <ClInclude Include="ExploreState.h" />
     <ClInclude Include="FightState.h" />
+    <ClInclude Include="FileLoader.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameState.h" />
     <ClInclude Include="GameStateMachine.h" />
