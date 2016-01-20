@@ -7,7 +7,33 @@
 bool InputHandler::handleInput()
 {
 	std::cout << "Action: "; 
-	std::cin >> input;
+	//std::cin >> input;
+
+	//std::string input;
+	//std::cin.ignore();
+	std::getline(std::cin, input);
+
+	if (Game::getInstance().getFSM()->currentState()->getStateID() == "MENU")
+	{
+		if (input == "new hero")
+		{
+
+		}
+		else if (input == "load hero")
+		{
+
+		}
+		else if (input == "new game")
+		{
+			Game::getInstance().start();
+		}
+		else
+		{
+			std::cout << "Input not allowed" << std::endl;
+			return false;
+		}
+		return true;
+	}
 
 	if (input == "move")
 	{

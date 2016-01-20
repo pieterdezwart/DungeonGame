@@ -1,8 +1,2 @@
-name:
-level:
-health:
-experience:
-attack:
-defense:
-perception:
-items: 
+properties,pieter,1,50,0,1,1,1
+items

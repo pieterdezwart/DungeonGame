@@ -6,7 +6,8 @@
 class Hero
 {
 public:
-	Hero(Room* start);
+	//Hero(Room* start);
+	Hero(std::string n, int l, int h, int x, int a, int d, int p) : name(n), level(l), health(h), experience(x), attack(a), defense(d), perception(p) {};
 	~Hero();
 
 	void setLocation(Room* room);
@@ -37,12 +38,14 @@ private:
 	Room* location = nullptr;
 
 	//stats
+	std::string name = "default";
 	int perception = 0;
 	int health = 50;
 	int maxHealth = 50;
 	int attack = 1;
 	int defense = 1;
 	int level = 1;
+	int experience = 0;
 
 	void setWeapon(Item* weap) { if (weap->getAttack() > 0) weapon = weap; };
 	void setShield(Item* shld) { if (shld->getDefense() > 0) shield = shld; };

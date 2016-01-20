@@ -13,17 +13,7 @@ void Game::init()
 {
 	srand(time(NULL)); // random number seed
 
-	//loadHeroFile("hero.txt");
-
-	//loadRoomFile("room.txt");
-
 	FileLoader* fileLoader = new FileLoader();
-
-	//loadEnemiesFile("Resources/enemy.txt");
-
-	//loadTrapFile("Resources/trap.txt");
-
-	//loadItemFile("Resources/item.txt");
 
 	// test enemies
 	for (Enemy* enemy : enemies)
@@ -43,14 +33,14 @@ void Game::init()
 		cout << item->getName() << ", " << item->getAttack() << endl;
 	}
 
-	dungeon = new Dungeon();
+	//dungeon = new Dungeon();
 
-	Room* startRoom = dungeon->currentMap()->getStartRoom();
+	//Room* startRoom = dungeon->currentMap()->getStartRoom();
 
-	hero = new Hero(startRoom);
+	//hero = new Hero(startRoom);
 
 	gameStateMachine = new GameStateMachine();
-	gameStateMachine->changeState(new ExploreState());
+	gameStateMachine->changeState(new MenuState());
 
 	//vector<Enemy*> enemies2 = dungeon->currentMap()->getEnemies();
 
@@ -72,6 +62,17 @@ void Game::init()
 	//{
 	//	cout << item->getName() << ", Room: " << item->getLocation()->getX() << "," << item->getLocation()->getY() << endl;
 	//}
+}
+
+void Game::start()
+{
+	dungeon = new Dungeon();
+
+	Room* startRoom = dungeon->currentMap()->getStartRoom();
+
+	hero->setLocation(startRoom);
+
+	gameStateMachine->changeState(new ExploreState());
 }
 
 void Game::gameLoop()

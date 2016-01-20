@@ -10,6 +10,7 @@ FileLoader::FileLoader()
 	parseEnemies();
 	parseItems();
 	parseTraps();
+	parseHero();
 }
 
 
@@ -25,11 +26,30 @@ void FileLoader::parseHero()
 	input.exceptions(std::ifstream::failbit | std::ifstream::badbit);
 
 	try {
-		input.open("hero.txt");
+		input.open("Resources/hero.txt");
+
+		std::string line;
 
 		while (!input.eof())
 		{
+			getline(input, line, '\n');
 
+			std::vector<std::string> tokens = split(line, ',');
+
+			if (tokens.at(0) == "properties")
+			{
+				Game::getInstance().setHero(new Hero(tokens.at(1), std::stoi(tokens.at(2)), std::stoi(tokens.at(3)), std::stoi(tokens.at(4)), std::stoi(tokens.at(5)), std::stoi(tokens.at(6)), std::stoi(tokens.at(7))));
+			}
+			if (tokens.at(0) == "items")
+			{
+				for (std::string token : tokens)
+				{
+					for (Item* item : Game::getInstance().getItems())
+					{
+						if (token != tokens.at(0) && std::stoi(token) == item->getID()) Game::getInstance().getHero()->addToInventory(item);
+					}
+				}
+			}
 
 		}
 	}
@@ -141,7 +161,7 @@ void FileLoader::parseItems()
 
 			vector<string> trapProperties = split(line, ',');
 
-			Game::getInstance().addItem(new Item(trapProperties.at(0), std::stoi(trapProperties.at(1)), std::stoi(trapProperties.at(2)), std::stoi(trapProperties.at(3))));
+			Game::getInstance().addItem(new Item(std::stoi(trapProperties.at(0)), trapProperties.at(1), std::stoi(trapProperties.at(2)), std::stoi(trapProperties.at(3)), std::stoi(trapProperties.at(4)), std::stoi(trapProperties.at(5))));
 
 		}
 	}

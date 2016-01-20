@@ -30,6 +30,8 @@ public:
 	void update();
 	void view();
 
+	void start();
+
 	string getRoom();
 
 	void addRoomSize(std::string token) { roomSize.push_back(token); };
@@ -57,9 +59,12 @@ public:
 	void genItems(Room* location, Map* m);
 
 	Hero* getHero() { return hero; };
+	void setHero(Hero* h) { hero = h; }
+
 	Dungeon* getDungeon() { return dungeon; };
 
 	vector<Enemy*> getEnemies() { return enemies; }
+	vector<Item*> getItems() { return items; }
 
 	void displayHeader();
 

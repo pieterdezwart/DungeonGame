@@ -3,11 +3,6 @@
 #include "Game.h"
 #include <vector>
 
-Hero::Hero(Room* start)
-{
-	setLocation(start);
-}
-
 
 Hero::~Hero()
 {
