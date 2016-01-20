@@ -41,7 +41,6 @@ public:
 
 	vector<Item*> getItems() { return items; };
 	void addItem(Item* item);
-	vector<Item*> getItems(Room* location);
 	bool removeItem(Item* item);
 	int getLevel() { return level; };
 private:

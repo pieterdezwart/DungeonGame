@@ -1,6 +1,7 @@
 #pragma once
 #include "Game.h"
 #include <string>
+#include <algorithm>
 
 class InputHandler
 {
@@ -27,7 +28,13 @@ private:
 	void move();
 	void block();
 	bool fighting;
+	void inventory();
 
 	std::string input;
+
+	bool is_number(std::string in) {
+		return !in.empty() && std::find_if(in.begin(),
+			in.end(), [](char c) { return !isdigit(c); }) == in.end();
+	};
 };
 

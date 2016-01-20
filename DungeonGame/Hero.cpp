@@ -53,6 +53,25 @@ void Hero::setLocation(Room* room)
 
 void Hero::search()
 {
+
+	std::cout << "Items:\n";
+	if (location->getItems().size() == 0)
+		std::cout << "The room is empty\n\n";
+	else
+	{
+		std::cout << "You found: ";
+		bool hasPrev = false;
+		// temp display
+		for (Item* item : location->getItems())
+		{
+			if (hasPrev) cout << ", ";
+			std::cout << item->getName();
+			addToInventory(item);
+			hasPrev = true;
+		}
+
+		std::cout << std::endl << std::endl;
+	}
 	addPerception(1);
 }
 
@@ -78,4 +97,16 @@ void Hero::printStats()
 	cout << "Health: \t" << health << "\n";
 	cout << "Attack: \t" << attack << "\n";
 	cout << "Perception: \t" << perception << "\n";
+}
+
+void Hero::useItem(Item* i)
+{
+	if (i->getAttack() > 0) setWeapon(i);
+	if (i->getDefense() > 0) setShield(i);
+	if (health > 0) usePotion(i);
+}
+
+void Hero::usePotion(Item* i)
+{
+	inventory.erase(std::remove(inventory.begin(), inventory.end(), i), inventory.end());
 }

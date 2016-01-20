@@ -1,6 +1,7 @@
 #include "Room.h"
 #include "Game.h"
 #include "Map.h"
+#include "Item.h"
 
 Room::Room(int x2, int y2, Map* m)
 {
@@ -143,4 +144,19 @@ vector<Trap*> Room::getTraps()
 	}
 
 	return roomTraps;
+}
+
+vector<Item*> Room::getItems()
+{
+	vector<Item*> roomItems;
+
+	for (Item* item : Game::getInstance().getDungeon()->currentMap()->getItems())
+	{
+		if (this == item->getLocation())
+		{
+			roomItems.push_back(item);
+		}
+	}
+
+	return roomItems;
 }

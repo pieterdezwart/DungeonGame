@@ -262,11 +262,6 @@ void Map::addItem(Item * item)
 	items.push_back(item);
 }
 
-vector<Item*> Map::getItems(Room * location)
-{
-	return items;
-}
-
 bool Map::removeItem(Item * item)
 {
 	return false;

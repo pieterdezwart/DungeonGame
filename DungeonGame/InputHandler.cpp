@@ -2,6 +2,7 @@
 #include "Game.h"
 #include <string>
 #include "FightState.h"
+#include "Item.h"
 
 bool InputHandler::handleInput()
 {
@@ -34,6 +35,15 @@ bool InputHandler::handleInput()
 	{
 		Game::getInstance().getHero()->printStats();
 		InputHandler::block();
+	}
+	if (input == "inventory")
+	{
+		inventory();
+	}
+	if (input == "search")
+	{
+		Game::getInstance().getHero()->search();
+		block();
 	}
 	else
 	{
@@ -86,4 +96,27 @@ void InputHandler::block()
 {
 	cout << "enter continue to continue playing\n";
 	cin >> input;
+}
+
+void InputHandler::inventory()
+{
+	Hero* h = Game::getInstance().getHero();
+	cout << "[0] Close inventory\n";
+	int index = 1;
+	for (Item* i : h->getInventory())
+	{
+		cout << "["<<index<<"] " << i->getName() << " " << "atk: " << i->getAttack() << ", def: " << i->getDefense() << ", hp: " << i->getHealth() << "\n";
+		index++;
+	}
+	cin >> input;
+	if (is_number(input))
+	{
+		int num = stoi(input);
+		if (num == 0 || num > h->getInventory().size()) return;
+		h->useItem(h->getInventory()[num-1]);
+	}
+	else {
+		cout << "Input was not numerical, please try again \n";
+		inventory();
+	}
 }

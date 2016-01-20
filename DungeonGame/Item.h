@@ -18,7 +18,7 @@ public:
 	std::string getName() { return name; }
 	int getAttack() { return attack; }
 	int getDefense() { return defense; }
-
+	int getHealth() { return health; };
 private:
 	Room* location = nullptr;
 

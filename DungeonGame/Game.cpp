@@ -310,7 +310,7 @@ void Game::genItems(Room* location, Map* m)
 	// per room the chance of an item is 5%?
 	int roll = rand() % 100;
 
-	if (roll >= 95)
+	if (roll >= 0)
 	{
 		// copy the object and create new pointer to object
 		Item* item = new Item(*items.at(rand() % (items.size() - 1)));
