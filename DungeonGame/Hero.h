@@ -22,6 +22,9 @@ public:
 	void setHealth(int h) { health = h; }
 	int getAttack() { return (weapon == nullptr) ? attack : attack + weapon->getAttack(); }
 	void setAttack(int a) { attack = a; }
+	int getDefense() { return defense; }
+	void setDefense(int d) { defense = d; }
+
 	void printStats();
 	//inventory
 	void addToInventory(Item* i) { inventory.push_back(i); i->setLocation(nullptr); };
@@ -35,9 +38,10 @@ private:
 
 	//stats
 	int perception = 0;
-	int health = 5;
+	int health = 50;
 	int maxHealth = 50;
 	int attack = 1;
+	int defense = 1;
 	int level = 1;
 	int defense = 0;
 

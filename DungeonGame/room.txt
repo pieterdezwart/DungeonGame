@@ -1,4 +1,0 @@
-klein,gemiddeld,groot
-opgeruimd,smerig
-tafel met 4 stoelen,een bed,leeg
-een kaars,een fakkel,een haardvuur

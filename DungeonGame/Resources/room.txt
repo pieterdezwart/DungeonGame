@@ -1,0 +1,4 @@
+1,klein,gemiddeld,groot
+2,opgeruimd,smerig
+3,tafel met 4 stoelen,een bed,leeg
+4,een kaars,een fakkel,een haardvuur
