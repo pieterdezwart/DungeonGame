@@ -21,6 +21,9 @@ public:
 	void setHealth(int h) { health = h; }
 	int getAttack() { return attack; }
 	void setAttack(int a) { attack = a; }
+	int getDefense() { return defense; }
+	void setDefense(int d) { defense = d; }
+
 	void printStats();
 private:
 	int x, y = 0;
@@ -33,6 +36,7 @@ private:
 	int health = 50;
 	int maxHealth = 50;
 	int attack = 1;
+	int defense = 1;
 	int level = 1;
 
 };
