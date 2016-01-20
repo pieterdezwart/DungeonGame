@@ -94,8 +94,9 @@ bool Hero::move(string direction)
 void Hero::printStats()
 {
 	cout << "Hero's stats:\n";
-	cout << "Health: \t" << health << "\n";
-	cout << "Attack: \t" << attack << "\n";
+	cout << "Health: \t" << getHealth() << "\n";
+	cout << "Attack: \t" << getAttack() << "\n";
+	cout << "Defense: \t" << getDefense() << "\n";
 	cout << "Perception: \t" << perception << "\n";
 }
 
