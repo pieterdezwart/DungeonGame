@@ -29,8 +29,13 @@ void FightState::update()
 
 		health = health - attack;
 
-
 		Game::getInstance().getHero()->setHealth(health);
+
+		if (Game::getInstance().getHero()->getHealth() <= 0)
+		{
+			// TODO: need to implement dead state, reload hero etc.
+			Game::getInstance().init();
+		}
 	}
 
 	if (enemyList.size() == 0)
@@ -45,10 +50,10 @@ void FightState::view()
 	std::cout << "Fighting:\n";
 
 	// temp display
-	for (Enemy* enemy : Game::getInstance().getHero()->getLocation()->getEnemies())
+	for (auto enemy : enemyList)
 	{
-		std::cout << enemy->getName() << ": ";
-		std::cout << enemy->getHealth() << " of " << enemy->getMaxHealth() << std::endl;
+		std::cout << enemy.first << ": ";
+		std::cout << enemy.second->getHealth() << " of " << enemy.second->getMaxHealth() << std::endl;
 	}
 
 	std::cout << std::endl;

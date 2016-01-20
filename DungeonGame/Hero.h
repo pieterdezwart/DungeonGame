@@ -30,7 +30,7 @@ private:
 
 	//stats
 	int perception = 0;
-	int health = 50;
+	int health = 5;
 	int maxHealth = 50;
 	int attack = 1;
 	int level = 1;
