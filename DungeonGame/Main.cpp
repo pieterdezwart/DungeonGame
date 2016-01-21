@@ -3,15 +3,11 @@
 
 int main(int argc, char* args[]) {
 
-	//Dungeon* dungeon = new Dungeon();
-
-	//Game* game = new Game();
+	srand((unsigned)time(0)); // activates the random generator
 
 	Game::getInstance().init();
 
 	Game::getInstance().gameLoop();
-
-	//cout << "test";
 
 	return 0;
 }

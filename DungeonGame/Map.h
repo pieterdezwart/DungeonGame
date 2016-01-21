@@ -16,8 +16,8 @@ using namespace std;
 class Map
 {
 public:
-	Map(int width, int height);
-	Map(int width, int height, Map* prev);
+	Map(int width, int height, int l);
+	Map(int width, int height, int l, Map* prev);
 	~Map();
 
 	void display(Room* heropos);

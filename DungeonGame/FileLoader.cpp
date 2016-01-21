@@ -133,7 +133,7 @@ void FileLoader::parseEnemies()
 
 			vector<string> enemyProperties = split(line, ',');
 
-			Game::getInstance().addEnemy(new Enemy(enemyProperties.at(0), std::stoi(enemyProperties.at(1)), std::stoi(enemyProperties.at(2)), std::stoi(enemyProperties.at(3)), 1));
+			Game::getInstance().addEnemy(new Enemy(enemyProperties.at(0), std::stoi(enemyProperties.at(1)), std::stoi(enemyProperties.at(2)), std::stoi(enemyProperties.at(3)), std::stoi(enemyProperties.at(4)), std::stoi(enemyProperties.at(5))));
 
 		}
 	}

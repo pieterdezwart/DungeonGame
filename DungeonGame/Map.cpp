@@ -1,7 +1,7 @@
 #include "Map.h"
 #include "Game.h"
 
-Map::Map(int width, int height)
+Map::Map(int width, int height, int l)
 {
 	// Set up sizes. (HEIGHT x WIDTH)
 	grid2.resize(height);
@@ -11,10 +11,10 @@ Map::Map(int width, int height)
 	max_X = width - 1;
 	max_Y = height - 1;
 	generateMap(nullptr);
-	level = 0;
+	level = l;
 }
 
-Map::Map(int width, int height, Map* prev)
+Map::Map(int width, int height, int l, Map* prev)
 {
 	// Set up sizes. (HEIGHT x WIDTH)
 	grid2.resize(height);
@@ -24,7 +24,8 @@ Map::Map(int width, int height, Map* prev)
 	max_X = width-1;
 	max_Y = height-1;
 	generateMap(prev->getExit());
-	level = prev->getLevel() + 1;
+	//level = prev->getLevel() + 1;
+	level = l;
 }
 
 
@@ -81,6 +82,7 @@ void Map::display(Room* heropos)
 	}
 	cout << getLegend();
 }
+
 void Map::displayCheat(Room* heropos)
 {
 	cout << "\n";
@@ -137,8 +139,8 @@ string Map::getLegend()
 	ret = ret + ":- : Hallways\n";
 	ret = ret + "S  : Starting location\n";
 	ret = ret + "X  : Room\n";
-	ret = ret + "U  : Stairs down\n";
-	ret = ret + "D  : Stairs up\n";
+	ret = ret + "D  : Stairs down\n";
+	ret = ret + "U  : Stairs up\n";
 	ret = ret + "H  : Hero's location\n";
 	return ret;
 }
@@ -160,22 +162,23 @@ void Map::generateMap(Room* prevLevel)
 		}
 	}
 
-	//
+	// select random point and open as exit node
 	exit = new Room(rand() % max_X, rand() % max_Y, this);
-	exit->setType('U'); // declare start room type
+	exit->setType('D'); // declare start room type
+	exit->setDescription("Entrance to the next level of the dungeon. There are stairs going down.");
 	grid2[exit->getY()][exit->getX()] = exit;
 
 	// select random point and open as start node
-	srand((unsigned)time(0)); // activates the random generator
 	if (prevLevel == nullptr)
 	{
 		startRoom = new Room(rand() % max_X, rand() % max_Y, this);
 		startRoom->setType('S'); // declare start room type
-		startRoom->setDescription("Dit is de ingang van de kerker. De deur naar buiten is dicht.");
+		startRoom->setDescription("This is the entrance to the dungeon. The door outside is closed.");
 	}
 	else {
 		startRoom = new Room(prevLevel->getX(), prevLevel->getY(), this);
-		startRoom->setType('D'); // declare start room type
+		startRoom->setType('U'); // declare start room type
+		startRoom->setDescription("Exit from the previous level of the dungeon. There are stairs going up.");
 	}
 	grid2[startRoom->getY()][startRoom->getX()] = startRoom;
 
@@ -189,8 +192,8 @@ void Map::generateMap(Room* prevLevel)
 
 	if (prevLevel != nullptr)
 	{
-		startRoom->addEdge("down", prevLevel);
-		prevLevel->addEdge("up", startRoom);
+		startRoom->addEdge("up", prevLevel);
+		prevLevel->addEdge("down", startRoom);
 	}
 
 }

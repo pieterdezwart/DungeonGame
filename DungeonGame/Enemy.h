@@ -7,11 +7,7 @@ class GameStateMachine;
 class Enemy
 {
 public:
-	Enemy(std::string n, int a, int h, int e, int l);
-
-	//Enemy(const Enemy& obj);  // copy constructor
-
-	//Enemy& operator=(const Enemy& obj) {};
+	Enemy(std::string n, int a, int d, int h, int e, bool b);
 
 	~Enemy();
 
@@ -39,13 +35,17 @@ public:
 
 	GameStateMachine* getFSM() { return stateMachine; }
 
+	void boostStats();
+
 private:
 	Room* location = nullptr;
 
 	std::string name;
 
 	int attack, defense, health, experience, level, maxHealth = 0;
+	bool boss = false;
 
 	GameStateMachine* stateMachine;
+
 };
 

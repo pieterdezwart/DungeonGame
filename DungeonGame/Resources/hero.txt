@@ -1,2 +1,2 @@
-properties,Pieter,1,50,0,1,1,1
+properties,Pieter,1,100,0,10,10,10
 items,

@@ -36,54 +36,72 @@ bool InputHandler::handleInput()
 		return true;
 	}
 
-	if (input == "move")
+	if (Game::getInstance().getFSM()->currentState()->getStateID() == "EXPLORE")
 	{
-		InputHandler::move();
-	}
-	if (input == "map")
-	{
-		Game::getInstance().getDungeon()->currentMap()->display(Game::getInstance().getHero()->getLocation());
-		InputHandler::block();
-	} 
-	if (input == "teleport-end")
-	{
-		Game::getInstance().getHero()->setLocation(Game::getInstance().getHero()->getLocation()->getMap()->getExit());
-	}
-	if (input == "attack")
-	{
-		if (Game::getInstance().getFSM()->currentState()->getStateID() != "FIGHT")
+		if (input == "move")
+		{
+			InputHandler::move();
+		}
+		if (input == "map")
+		{
+			Game::getInstance().getDungeon()->currentMap()->display(Game::getInstance().getHero()->getLocation());
+			InputHandler::block();
+		}
+		if (input == "map-cheat")
+		{
+			Game::getInstance().getDungeon()->currentMap()->displayCheat(Game::getInstance().getHero()->getLocation());
+			InputHandler::block();
+		}
+		if (input == "teleport-end")
+		{
+			Game::getInstance().getHero()->setLocation(Game::getInstance().getHero()->getLocation()->getMap()->getExit());
+		}
+		if (input == "attack")
+		{
 			Game::getInstance().getFSM()->changeState(new FightState());
+		}
+		if (input == "stats")
+		{
+			Game::getInstance().getHero()->printStats();
+			InputHandler::block();
+		}
+		if (input == "inventory")
+		{
+			inventory();
+		}
+		if (input == "search")
+		{
+			Game::getInstance().getHero()->search();
+			block();
+		}
 		else
-			dynamic_cast<FightState*>(Game::getInstance().getFSM()->currentState())->pickEnemy();
+		{
+			cout << "Input not allowed" << endl;
+		}
+		return true;
+	}
 
-			
-	}
-	if (input == "stats")
+	if (Game::getInstance().getFSM()->currentState()->getStateID() == "FIGHT")
 	{
-		Game::getInstance().getHero()->printStats();
-		InputHandler::block();
+		if (input == "attack")
+		{
+			dynamic_cast<FightState*>(Game::getInstance().getFSM()->currentState())->pickEnemy();
+		}
+		else
+		{
+			cout << "Input not allowed" << endl;
+		}
+		return true;
 	}
-	if (input == "inventory")
-	{
-		inventory();
-	}
-	if (input == "search")
-	{
-		Game::getInstance().getHero()->search();
-		block();
-	}
-	else
-	{
-		cout << "Input not allowed" << endl;
-	}
-	return true;
+
+
 }
 
 string InputHandler::getOptions()
 {
 	if (Game::getInstance().getHero()->getLocation()->getEnemies().size() > 0)
 	{
-		return "[attack:flee:search:inventory:map:stats]";
+		return "[attack:search:inventory:map:stats:move]";
 	}
 	else
 	 return "[look:search:rest:inventory:map:stats:move]";

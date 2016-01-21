@@ -10,6 +10,9 @@ void ExploreState::update()
 
 void ExploreState::view()
 {
+	std::cout << "Level: ";
+	std::cout << Game::getInstance().getDungeon()->currentMap()->getLevel() << std::endl << std::endl;
+
 	std::cout << "Description:\n";
 	std::cout << Game::getInstance().getHero()->getLocation()->getDescription() << std::endl << std::endl;
 
@@ -34,10 +37,10 @@ void ExploreState::view()
 
 	if (Game::getInstance().getHero()->getLocation()->getEnemies().size() > 0)
 	{
-		std::cout << "[attack:flee:search:inventory:map:stats]\n\n";
+		std::cout << "[attack:inventory:map:stats:move]\n\n";
 	}
 	else
-		std::cout << "[look:search:rest:inventory:map:stats:move]\n\n";
+		std::cout << "[search:rest:inventory:map:stats:move]\n\n";
 }
 
 bool ExploreState::onEnter()

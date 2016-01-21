@@ -2,20 +2,15 @@
 #include <iostream>
 #include "GameStateMachine.h"
 #include "EnemyStates.h"
+#include "Game.h"
 
-//Enemy::Enemy(const Enemy & obj)
-//{
-//	std::cout << "Copy constructor allocating ptr." << std::endl;
-//
-//	name = "test";
-//}
-
-Enemy::Enemy(std::string n, int a, int h, int e, int l) : name(n), attack(a), health(h), experience(e), level(l)
+Enemy::Enemy(std::string n, int a, int d, int h, int e, bool b) : name(n), attack(a), defense(d), health(h), experience(e), boss(b)
 {
 	stateMachine = new GameStateMachine();
 	stateMachine->changeState(new IdleState());
 
 	maxHealth = health;
+
 }
 
 Enemy::~Enemy()
@@ -25,6 +20,18 @@ Enemy::~Enemy()
 void Enemy::move()
 {
 	
+}
+
+// increase enemy stats based on level
+void Enemy::boostStats()
+{
+	if (level > 1)
+	{
+		attack = (attack * level) * 1.2;
+		defense = (defense * level) * 1.2;
+		health = (health * level) * 1.2;
+		experience = (experience * level) * 1.2;
+	}
 }
 
 void Enemy::setName(std::string value)

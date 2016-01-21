@@ -6,7 +6,6 @@
 class Hero
 {
 public:
-	//Hero(Room* start);
 	Hero(std::string n) : name(n) {};
 	Hero(std::string n, int l, int h, int x, int a, int d, int p) : name(n), level(l), health(h), experience(x), attack(a), defense(d), perception(p) {};
 	~Hero();
@@ -14,7 +13,6 @@ public:
 	void setLocation(Room* room);
 	Room* getLocation() { return location; };
 
-	void look();
 	void search();
 	bool move(string direction);
 	
@@ -38,6 +36,8 @@ public:
 	void addToInventory(Item* i) { inventory.push_back(i); i->setLocation(nullptr); };
 	vector<Item*> getInventory() { return inventory; };
 	void useItem(Item* i);
+
+	void levelUp();
 private:
 	int x, y = 0;
 	Room* currentRoom = nullptr; // current location of the hero
@@ -46,13 +46,14 @@ private:
 
 	//stats
 	std::string name = "default";
-	int perception = 1;
-	int health = 50;
-	int maxHealth = 50;
-	int attack = 1;
-	int defense = 1;
+	int perception = 10;
+	int health = 100;
+	int maxHealth = 100;
+	int attack = 10;
+	int defense = 10;
 	int level = 1;
 	int experience = 0;
+	int requiredXp = 100;
 
 	void setWeapon(Item* weap) { if (weap->getAttack() > 0) weapon = weap; };
 	void setShield(Item* shld) { if (shld->getDefense() > 0) shield = shld; };

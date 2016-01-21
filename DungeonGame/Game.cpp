@@ -36,26 +36,6 @@ void Game::init()
 	gameStateMachine = new GameStateMachine();
 	gameStateMachine->changeState(new MenuState());
 
-	//vector<Enemy*> enemies2 = dungeon->currentMap()->getEnemies();
-
-	//for (Enemy* enemy : enemies2)
-	//{
-	//	cout << enemy->getName() << ", Room: " << enemy->getLocation()->getX() << "," << enemy->getLocation()->getY() << endl;
-	//}
-
-	//vector<Trap*> traps2 = dungeon->currentMap()->getTraps();
-
-	//for (Trap* trap : traps2)
-	//{
-	//	cout << trap->getName() << ", Room: " << trap->getLocation()->getX() << "," << trap->getLocation()->getY() << endl;
-	//}
-
-	//vector<Item*> items2 = dungeon->currentMap()->getItems();
-
-	//for (Item* item : items2)
-	//{
-	//	cout << item->getName() << ", Room: " << item->getLocation()->getX() << "," << item->getLocation()->getY() << endl;
-	//}
 }
 
 void Game::start()
@@ -196,12 +176,12 @@ void Game::genEnemies(Room* location, Map* m)
 			// copy the object and create new pointer to object
 			Enemy* enemy = new Enemy(*enemies.at(rand() % (enemies.size() - 1)));
 			enemy->setLocation(location);
-
+			enemy->setLevel(m->getLevel());
+			enemy->boostStats();
 			//dungeon->currentMap()->display();
 			//dungeon->currentMap()->addEnemy(enemy);
 			m->addEnemy(enemy);
 
-			//delete enemy;
 		}
 
 	}

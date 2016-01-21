@@ -8,14 +8,6 @@ Hero::~Hero()
 {
 }
 
-void Hero::look()
-{
-	cout << "Je kijkt om je heen \n";
-	cout << "Beschrijving " << location->getDescription() << "\n";
-	cout << "Uitgangen: " << location->getExitStrings() << "\n";
-	cout << "pos" << x << "," << y << "\n";
-}
-
 void Hero::setLocation(Room* room)
 {
 	location = room; 
@@ -99,6 +91,18 @@ void Hero::useItem(Item* i)
 	if (i->getAttack() > 0) setWeapon(i);
 	if (i->getDefense() > 0) setShield(i);
 	if (health > 0) usePotion(i);
+}
+
+void Hero::levelUp()
+{
+	if (level > 1)
+	{
+		attack = (attack * level) * 1.2;
+		defense = (defense * level) * 1.2;
+		health = (health * level) * 1.2;
+		requiredXp = (requiredXp * level) * 1.2;
+		experience = 0;
+	}
 }
 
 void Hero::usePotion(Item* i)

@@ -14,5 +14,8 @@ public:
 	void setCurrentMap(Map* m) { map = m; };
 private: 
 	Map* map = nullptr;
+
+	// safer method i think
+	vector<Map*> mapList;
 };
 
