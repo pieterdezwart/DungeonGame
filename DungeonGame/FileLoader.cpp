@@ -56,8 +56,8 @@ void FileLoader::parseHero()
 	catch (std::ifstream::failure e) {
 		std::cout << "Error opening/reading file: " << e.what() << std::endl;
 	}
-
-	input.close();
+	if (input.is_open())
+		input.close();
 
 }
 
@@ -112,8 +112,8 @@ void FileLoader::parseRooms()
 	catch (std::ifstream::failure e) {
 		std::cout << "Error opening/reading file: " << e.what() << std::endl;
 	}
-
-	input.close();
+	if (input.is_open())
+		input.close();
 }
 
 void FileLoader::parseEnemies()
@@ -140,8 +140,8 @@ void FileLoader::parseEnemies()
 	catch (std::ifstream::failure e) {
 		std::cout << "Error opening/reading file: " << e.what() << std::endl;
 	}
-
-	input.close();
+	if (input.is_open())
+		input.close();
 }
 
 void FileLoader::parseItems()
@@ -168,8 +168,8 @@ void FileLoader::parseItems()
 	catch (std::ifstream::failure e) {
 		std::cout << "Error opening/reading file: " << e.what() << std::endl;
 	}
-
-	input.close();
+	if (input.is_open())
+		input.close();
 
 }
 
@@ -197,9 +197,37 @@ void FileLoader::parseTraps()
 	catch (std::ifstream::failure e) {
 		std::cout << "Error opening/reading file: " << e.what() << std::endl;
 	}
+	if (input.is_open())
+		input.close();
 
-	input.close();
+}
 
+void FileLoader::saveHero()
+{
+	std::ofstream output;
+
+	output.exceptions(std::ofstream::failbit | std::ofstream::badbit);
+
+	try
+	{
+		output.open("Resources/hero.txt");
+
+		Hero* tempHero = Game::getInstance().getHero();
+
+		output << "properties," << tempHero->getName() << "," << tempHero->getLevel() << "," << tempHero->getHealth() << "," << tempHero->getExp() << "," << tempHero->getAttack() << "," << tempHero->getDefense() << "," << tempHero->getPerception() << "\n";
+		output << "items,";
+
+		for (Item* item : tempHero->getInventory())
+		{
+			output << item->getID();
+			if (tempHero->getInventory().back() != item) ",";
+		}
+	}
+	catch (std::ofstream::failure e) {
+		std::cout << "Error writing/opening file: " << e.what() << std::endl;
+	}
+	if (output.is_open())
+		output.close();
 }
 
 std::vector<std::string> FileLoader::split(std::string str, char delim)

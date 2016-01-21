@@ -7,6 +7,7 @@ class Hero
 {
 public:
 	//Hero(Room* start);
+	Hero(std::string n) : name(n) {};
 	Hero(std::string n, int l, int h, int x, int a, int d, int p) : name(n), level(l), health(h), experience(x), attack(a), defense(d), perception(p) {};
 	~Hero();
 
@@ -17,7 +18,13 @@ public:
 	void search();
 	bool move(string direction);
 	
+	std::string getName() { return name; }
 	void addPerception(int xp) { perception += xp; };
+	int getPerception() { return perception; }
+	void setLevel(int l) { level = l; }
+	int getLevel() { return level; }
+	int getExp() { return experience; }
+	void addExp(int x) { experience += x; }
 	int getHealth() { return health; }
 	int getMaxHealth() { return maxHealth; }
 	void setHealth(int h) { health = h; }
@@ -39,7 +46,7 @@ private:
 
 	//stats
 	std::string name = "default";
-	int perception = 0;
+	int perception = 1;
 	int health = 50;
 	int maxHealth = 50;
 	int attack = 1;

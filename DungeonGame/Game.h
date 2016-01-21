@@ -13,6 +13,7 @@ using namespace std;
 
 class Trap;
 class Item;
+class FileLoader;
 
 class Game
 {
@@ -31,6 +32,7 @@ public:
 	void view();
 
 	void start();
+	void resetHero();
 
 	string getRoom();
 
@@ -78,6 +80,8 @@ private:
 	// Stop the compiler generating methods of copy the object
 	Game(Game const&) = delete;
 	void operator=(Game const&) = delete;
+
+	FileLoader* fileLoader = nullptr;
 
 	vector<string> roomSize, roomState, roomProperties, roomLight;
 	

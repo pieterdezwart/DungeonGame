@@ -15,13 +15,13 @@ public:
 	FileLoader();
 	~FileLoader();
 
-	void loadFile(std::string file);
-
 	void parseHero();
 	void parseRooms();
 	void parseEnemies();
 	void parseItems();
 	void parseTraps();
+
+	void saveHero();
 
 private:
 	std::vector<std::string> split(std::string str, char delim);

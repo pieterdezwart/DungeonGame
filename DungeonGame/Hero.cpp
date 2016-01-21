@@ -8,7 +8,6 @@ Hero::~Hero()
 {
 }
 
-
 void Hero::look()
 {
 	cout << "Je kijkt om je heen \n";

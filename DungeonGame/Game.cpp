@@ -13,7 +13,7 @@ void Game::init()
 {
 	srand(time(NULL)); // random number seed
 
-	FileLoader* fileLoader = new FileLoader();
+	fileLoader = new FileLoader();
 
 	// test enemies
 	for (Enemy* enemy : enemies)
@@ -32,12 +32,6 @@ void Game::init()
 	{
 		cout << item->getName() << ", " << item->getAttack() << endl;
 	}
-
-	//dungeon = new Dungeon();
-
-	//Room* startRoom = dungeon->currentMap()->getStartRoom();
-
-	//hero = new Hero(startRoom);
 
 	gameStateMachine = new GameStateMachine();
 	gameStateMachine->changeState(new MenuState());
@@ -104,7 +98,18 @@ void Game::view()
 	gameStateMachine->view();
 }
 
+void Game::resetHero()
+{
+	std::cout << "What is your name (no spaces):" << std::endl;
 
+	std::string name;
+
+	std::cin >> name;
+
+	hero = new Hero(name);
+
+	fileLoader->saveHero();
+}
 
 string Game::getRoom() {
 	return hero->getLocation()->getDescription();
@@ -242,7 +247,7 @@ void Game::genItems(Room* location, Map* m)
 void Game::displayHeader()
 {
 	cout << "=============================================" << endl;
-	cout << "=		DUNGEON GAME		=" << endl;
+	cout << "       		DUNGEON GAME		" << endl;
 	cout << "=============================================" << endl;
 	cout << endl;
 }

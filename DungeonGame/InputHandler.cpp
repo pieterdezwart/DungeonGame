@@ -9,18 +9,19 @@ bool InputHandler::handleInput()
 	std::cout << "Action: "; 
 	//std::cin >> input;
 
-	//std::string input;
-	//std::cin.ignore();
-	std::getline(std::cin, input);
+	std::getline(std::cin, input); // does not ignore whitespace
 
 	if (Game::getInstance().getFSM()->currentState()->getStateID() == "MENU")
 	{
 		if (input == "new hero")
 		{
+			std::cout << "Warning, this will delete the current hero" << std::endl;
+			std::cout << "[ok:back]" << std::endl;
 
-		}
-		else if (input == "load hero")
-		{
+			std::cin >> input;
+
+			if(input == "ok") Game::getInstance().resetHero();
+			else return true;
 
 		}
 		else if (input == "new game")
