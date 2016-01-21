@@ -33,6 +33,7 @@ public:
 
 	void start();
 	void resetHero();
+	void save();
 
 	string getRoom();
 

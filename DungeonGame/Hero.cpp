@@ -2,7 +2,7 @@
 #include "Room.h"
 #include "Game.h"
 #include <vector>
-
+#include "MenuState.h"
 
 Hero::~Hero()
 {
@@ -71,6 +71,13 @@ bool Hero::move(string direction)
 			if (direction == "up" || direction == "down")
 			{
 				Game::getInstance().getDungeon()->setCurrentMap(getLocation()->getMap());
+
+				if (direction == "down" && location->getMap()->getLevel() == 10)
+				{
+					Game::getInstance().setMessage("You have reached the end. You will now return to the main menu.");
+					Game::getInstance().save();
+					Game::getInstance().getFSM()->changeState(new MenuState());
+				}
 			}
 			return true;
 		}
@@ -116,6 +123,20 @@ void Hero::levelUp()
 	}
 
 	Game::getInstance().setMessage("You have leveled up. Your stats have increased.\n");
+}
+
+void Hero::rest()
+{
+	if (location->getEnemies().size() > 0)
+	{
+		Game::getInstance().setMessage("Can't rest when enemies are nearby");
+	}
+	else
+	{
+		health = health + (0.1 * maxHealth);
+
+		Game::getInstance().setMessage("You rest and gain some health");
+	}
 }
 
 void Hero::usePotion(Item* i)

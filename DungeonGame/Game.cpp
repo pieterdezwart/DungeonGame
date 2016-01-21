@@ -91,6 +91,11 @@ void Game::resetHero()
 	fileLoader->saveHero();
 }
 
+void Game::save()
+{
+	fileLoader->saveHero();
+}
+
 string Game::getRoom() {
 	return hero->getLocation()->getDescription();
 }

@@ -28,6 +28,10 @@ bool InputHandler::handleInput()
 		{
 			Game::getInstance().start();
 		}
+		else if (input == "exit")
+		{
+			exit(0);
+		}
 		else
 		{
 			std::cout << "Input not allowed" << std::endl;
@@ -73,6 +77,11 @@ bool InputHandler::handleInput()
 		{
 			Game::getInstance().getHero()->search();
 			block();
+		}
+		if (input == "rest")
+		{
+			Game::getInstance().getHero()->rest();
+			return false;
 		}
 		else
 		{

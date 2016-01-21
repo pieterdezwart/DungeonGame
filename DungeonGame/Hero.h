@@ -38,6 +38,7 @@ public:
 	void useItem(Item* i);
 
 	void levelUp();
+	void rest();
 private:
 	int x, y = 0;
 	Room* currentRoom = nullptr; // current location of the hero

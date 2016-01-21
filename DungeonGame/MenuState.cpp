@@ -26,10 +26,10 @@ void MenuState::view()
 
 	if (Game::getInstance().getHero() == nullptr)
 	{
-		std::cout << "[new hero]\n";
+		std::cout << "[new hero:exit]\n";
 	}
 	else
-		std::cout << "[new hero:new game]\n";
+		std::cout << "[new hero:new game:exit]\n";
 }
 
 bool MenuState::onEnter()
