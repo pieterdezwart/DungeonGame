@@ -31,6 +31,8 @@ void Enemy::boostStats()
 		defense = (defense * level) * 1.2;
 		health = (health * level) * 1.2;
 		experience = (experience * level) * 1.2;
+
+		maxHealth = health;
 	}
 }
 

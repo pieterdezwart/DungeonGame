@@ -77,6 +77,14 @@ bool Hero::move(string direction)
 	return false;
 }
 
+void Hero::addExp(int x)
+{
+	experience += x;
+
+	if (experience >= requiredXp)
+		levelUp();
+}
+
 void Hero::printStats()
 {
 	cout << "Hero's stats:\n";
@@ -84,6 +92,7 @@ void Hero::printStats()
 	cout << "Attack: \t" << getAttack() << "\n";
 	cout << "Defense: \t" << getDefense() << "\n";
 	cout << "Perception: \t" << perception << "\n";
+	cout << "Experience: \t" << experience << "/" << requiredXp << "\n";
 }
 
 void Hero::useItem(Item* i)
@@ -95,6 +104,8 @@ void Hero::useItem(Item* i)
 
 void Hero::levelUp()
 {
+	level++;
+
 	if (level > 1)
 	{
 		attack = (attack * level) * 1.2;
@@ -103,6 +114,8 @@ void Hero::levelUp()
 		requiredXp = (requiredXp * level) * 1.2;
 		experience = 0;
 	}
+
+	Game::getInstance().setMessage("You have leveled up. Your stats have increased.\n");
 }
 
 void Hero::usePotion(Item* i)

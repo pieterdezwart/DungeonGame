@@ -22,7 +22,7 @@ public:
 	void setLevel(int l) { level = l; }
 	int getLevel() { return level; }
 	int getExp() { return experience; }
-	void addExp(int x) { experience += x; }
+	void addExp(int x);
 	int getHealth() { return health; }
 	int getMaxHealth() { return maxHealth; }
 	void setHealth(int h) { health = h; }

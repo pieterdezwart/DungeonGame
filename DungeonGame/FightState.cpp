@@ -93,7 +93,7 @@ void FightState::pickEnemy()
 	std::cout << "]\n";
 
 	std::string input;
-	std::cin.ignore();
+	//std::cin.ignore();
 	std::getline(std::cin, input);
 
 	result(input);
@@ -112,6 +112,7 @@ void FightState::result(std::string input)
 	if (eHealth <= 0)
 	{
 		heroResult = "You killed " + input;
+		Game::getInstance().getHero()->addExp(enemyList.at(input)->getExperience()); // if you kill an enemy add xp
 		delete enemyList.at(input);
 		enemyList.erase(input);
 	}
