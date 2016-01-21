@@ -178,8 +178,7 @@ void Game::genEnemies(Room* location, Map* m)
 			enemy->setLocation(location);
 			enemy->setLevel(m->getLevel());
 			enemy->boostStats();
-			//dungeon->currentMap()->display();
-			//dungeon->currentMap()->addEnemy(enemy);
+
 			m->addEnemy(enemy);
 
 		}
@@ -198,10 +197,7 @@ void Game::genTraps(Room* location, Map* m)
 		Trap* trap = new Trap(*traps.at(rand() % (traps.size() - 1)));
 		trap->setLocation(location);
 
-		//dungeon->currentMap()->addTrap(trap);
 		m->addTrap(trap);
-		//delete trap;
-
 	}
 }
 
@@ -216,11 +212,7 @@ void Game::genItems(Room* location, Map* m)
 		Item* item = new Item(*items.at(rand() % (items.size() - 1)));
 		item->setLocation(location);
 
-		//dungeon->currentMap()->addItem(item);
 		m->addItem(item);
-
-		//delete item;
-
 	}
 }
 

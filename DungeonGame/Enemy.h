@@ -32,6 +32,7 @@ public:
 	int getMaxHealth() { return maxHealth; };
 	int getExperience();
 	int getLevel();
+	bool getBoss() { return boss; }
 
 	GameStateMachine* getFSM() { return stateMachine; }
 
