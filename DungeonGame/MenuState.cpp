@@ -34,13 +34,10 @@ void MenuState::view()
 
 bool MenuState::onEnter()
 {
-	std::cout << "Entering MenuState";
-
 	return true;
 }
 
 bool MenuState::onExit()
 {
-	std::cout << "Exiting MenuState";
 	return true;
 }

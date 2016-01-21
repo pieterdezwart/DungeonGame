@@ -3,6 +3,7 @@
 #include "Game.h"
 #include "EnemyStates.h"
 #include "ExploreState.h"
+#include "MenuState.h"
 
 const std::string FightState::stateID = "FIGHT";
 
@@ -34,7 +35,8 @@ void FightState::update()
 		if (Game::getInstance().getHero()->getHealth() <= 0)
 		{
 			// TODO: need to implement dead state, reload hero etc.
-			Game::getInstance().init();
+			Game::getInstance().setHero(new Hero(Game::getInstance().getHero()->getName()));
+			Game::getInstance().getFSM()->changeState(new MenuState());
 		}
 	}
 
@@ -128,8 +130,6 @@ void FightState::result(std::string input)
 
 bool FightState::onEnter()
 {
-	std::cout << "Entering FightState";
-
 	// for each unique enemy type increase counter
 	for (int i = 0; i < Game::getInstance().getHero()->getLocation()->getEnemies().size(); i++)
 	{
@@ -154,6 +154,5 @@ bool FightState::onEnter()
 
 bool FightState::onExit()
 {
-	std::cout << "Exiting FightState";
 	return true;
 }

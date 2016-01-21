@@ -1,5 +1,6 @@
 #include "ExploreState.h"
 #include "Game.h"
+#include "InputHandler.h"
 #include <iostream>
 
 const std::string ExploreState::stateID = "EXPLORE";
@@ -17,7 +18,7 @@ void ExploreState::view()
 	std::cout << Game::getInstance().getHero()->getLocation()->getDescription() << std::endl << std::endl;
 
 	std::cout << "Exits:\n";
-	std::cout << Game::getInstance().getHero()->getLocation()->getExitStrings() << std::endl << std::endl;
+	std::cout << InputHandler::getInstance().moveDirections() << std::endl << std::endl;
 
 	std::cout << "Enemies:\n";
 	if (Game::getInstance().getHero()->getLocation()->getEnemies().size() == 0)
@@ -45,12 +46,10 @@ void ExploreState::view()
 
 bool ExploreState::onEnter()
 {
-	std::cout << "Entering ExploreState\n";
 	return true;
 }
 
 bool ExploreState::onExit()
 {
-	std::cout << "Exiting ExploreState\n";
 	return true;
 }
