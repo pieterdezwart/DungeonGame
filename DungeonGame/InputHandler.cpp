@@ -148,8 +148,8 @@ void InputHandler::move()
 
 void InputHandler::block()
 {
-	cout << "enter continue to continue playing\n";
-	cin >> input;
+	cout << getOptions() << "\n";
+	handleInput();
 }
 
 void InputHandler::inventory()
