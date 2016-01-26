@@ -15,9 +15,16 @@ void MenuState::view()
 {
 	if (Game::getInstance().getHero() != nullptr)
 	{
-		std::cout << "Current hero:" << std::endl << std::endl;
-		std::cout << "Name: " << Game::getInstance().getHero()->getName() << std::endl << std::endl;
-		Game::getInstance().getHero()->printStats();
+		if (Game::getInstance().getHero()->getHealth() > 0)
+		{
+			std::cout << "Current hero:" << std::endl << std::endl;
+			std::cout << "Name: " << Game::getInstance().getHero()->getName() << std::endl << std::endl;
+			Game::getInstance().getHero()->printStats();
+		}
+		else {
+			std::cout << "No hero found. Please create a new hero." << std::endl << std::endl;
+			Game::getInstance().setHero(nullptr);
+		}
 	}
 	else
 		std::cout << "No hero found. Please create a new hero." << std::endl << std::endl;
