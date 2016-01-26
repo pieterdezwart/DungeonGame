@@ -30,6 +30,7 @@ public:
 	void setAttack(int a) { attack = a; }
 	int getDefense() { return (shield == nullptr) ? defense : defense + shield->getDefense(); }
 	void setDefense(int d) { defense = d; }
+	void addDefense(int d) { defense += d; }
 
 	void printStats();
 	//inventory
