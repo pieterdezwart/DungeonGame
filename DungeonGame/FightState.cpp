@@ -79,7 +79,7 @@ void FightState::view()
 		<< Game::getInstance().getHero()->getMaxHealth() << " life remaining.\n\n";
 
 	std::cout << "Make a move.\n\n";
-	std::cout << "[attack:flee:potion:item]\n\n";
+	std::cout << "[attack:flee:item]\n\n";
 
 	enemyAttack = true; // enable enemy attacks after entering
 
@@ -161,4 +161,17 @@ bool FightState::onEnter()
 bool FightState::onExit()
 {
 	return true;
+}
+
+void FightState::attemptFlee()
+{
+	int roll = rand() % 100;
+	if (roll > 80)
+	{
+		Game::getInstance().getFSM()->changeState(new ExploreState());
+		Game::getInstance().setMessage("You have successfully fleed your enemies!\n");
+	}
+	else {
+		Game::getInstance().setMessage("Your fleeing attempt failed!\n");
+	}
 }

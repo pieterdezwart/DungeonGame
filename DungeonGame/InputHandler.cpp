@@ -96,6 +96,15 @@ bool InputHandler::handleInput()
 		{
 			dynamic_cast<FightState*>(Game::getInstance().getFSM()->currentState())->pickEnemy();
 		}
+		if (input == "flee")
+		{
+			dynamic_cast<FightState*>(Game::getInstance().getFSM()->currentState())->attemptFlee();
+		}
+
+		if (input == "item")
+		{
+			inventory();
+		}
 		else
 		{
 			cout << "Input not allowed" << endl;

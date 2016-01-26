@@ -117,7 +117,8 @@ void Hero::levelUp()
 	{
 		attack = (attack * level) * 1.2;
 		defense = (defense * level) * 1.2;
-		health = (health * level) * 1.2;
+		maxHealth = (maxHealth * level) * 1.2;
+		health = maxHealth;
 		requiredXp = (requiredXp * level) * 1.2;
 		experience = 0;
 	}

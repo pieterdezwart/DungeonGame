@@ -15,6 +15,7 @@ public:
 	virtual std::string getStateID() const { return stateID; }
 
 	void pickEnemy();
+	void attemptFlee();
 
 	void result(std::string choice);
 
