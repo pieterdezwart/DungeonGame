@@ -25,6 +25,7 @@ void FightState::update()
 			enemiesResult += enemy.first + " attacks and does ";
 			enemiesResult += std::to_string(enemy.second->getAttack()) + " damage.\n";
 		}
+		attack -= Game::getInstance().getHero()->getDefense() * rand() % 2;
 
 		int health = Game::getInstance().getHero()->getHealth();
 
