@@ -16,14 +16,13 @@ public:
 
 	void pickEnemy();
 	void attemptFlee();
-
+	bool bossFight();
 	void result(std::string choice);
 
 private:
 	static const std::string stateID;
 
 	bool enemyAttack = false; // disable enemy attacks on entering fight state
-
 	std::map<std::string, Enemy*> enemyList;
 
 	std::string heroResult;

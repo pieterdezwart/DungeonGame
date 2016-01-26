@@ -1,2 +1,2 @@
-properties,Pieter,1,-10,0,10,10,11
+properties,henk,1,100,0,10,10,10
 items,
