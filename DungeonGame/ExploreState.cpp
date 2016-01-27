@@ -26,9 +26,15 @@ void ExploreState::view()
 	else
 	{
 		// temp display
+		int size = 1;
 		for (Enemy* enemy : Game::getInstance().getHero()->getLocation()->getEnemies())
 		{
-			std::cout << enemy->getName() << ", ";
+			if (size != Game::getInstance().getHero()->getLocation()->getEnemies().size())
+				std::cout << enemy->getName() << ",";
+			else
+				std::cout << enemy->getName() << "";
+
+			size++;
 		}
 
 		std::cout << std::endl << std::endl;

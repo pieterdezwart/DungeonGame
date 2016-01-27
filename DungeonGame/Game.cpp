@@ -57,7 +57,8 @@ void Game::gameLoop()
 	while (playing)
 	{
 		if(clear) system("cls"); // clear the screen
-
+		//system("cls");
+		
 		displayHeader();
 		displayMessage();
 		update();
@@ -100,25 +101,6 @@ string Game::getRoom() {
 	return hero->getLocation()->getDescription();
 }
 
-vector<string> Game::getRoomSizes()
-{
-	return roomSize;
-}
-
-vector<string> Game::getRoomStates()
-{
-	return roomState;
-}
-
-vector<string> Game::getRoomProperties()
-{
-	return roomProperties;
-}
-
-vector<string> Game::getRoomLights()
-{
-	return roomLight;
-}
 
 string Game::getRandStringElem(vector<string> array)
 {
@@ -129,33 +111,18 @@ string Game::getRandStringElem(vector<string> array)
 
 string Game::genRoomDescription()
 {
-	string description = "Het is een ";
 
-	string size = getRandStringElem(roomSize);
+	string description = "It is a ";
 
-	if (size == "groot") 
-		size = "grote"; 
-	else 
-		size += "e";
+	description += getRandStringElem(roomAtmosphere) + " " + getRandStringElem(roomSize) + " room. ";
+	if ((rand() % 1) == 0)
+		description += "In the corner is " + getRandStringElem(roomProperties) + ".";
+	else
+		description += "There is " + getRandStringElem(roomProperties) + " the center.";
 
-	string state = getRandStringElem(roomState);
+	description += " On the wall is " + getRandStringElem(roomWall) + ". ";
 
-	state += "e";
-
-	description += size + " " + state + " kamer.";
-
-	string property = getRandStringElem(roomProperties);
-
-	if (property == "tafel met 4 stoelen")
-		description += "In het midden staat een " + property + ".";
-	if (property == "een bed")
-		description += "In de hoek staat " + property + ".";
-	if (property == "leeg")
-		description += "Het is een lege ruimte.";
-
-	string light = getRandStringElem(roomLight);
-
-	description += "Hij wordt verlicht door " + light + ".";
+	description += "The room is being lit by " + getRandStringElem(roomLight) + ".";
 
 	return description;
 }
@@ -211,7 +178,7 @@ void Game::genItems(Room* location, Map* m)
 	// per room the chance of an item is 5%?
 	int roll = rand() % 100;
 
-	if (roll >= 0)
+	if (roll >= 60)
 	{
 		// copy the object and create new pointer to object
 		Item* item = new Item(*items.at(rand() % (items.size() - 1)));

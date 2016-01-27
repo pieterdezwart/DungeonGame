@@ -1,3 +1,5 @@
-kuil,10
-landmijn,30
-laser,20
+pit,10
+spikes,30
+fire,20
+fallen rock, 15
+guillotine, 40

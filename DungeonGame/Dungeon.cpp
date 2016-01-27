@@ -21,15 +21,8 @@ Dungeon::Dungeon()
 
 	map = mapList.at(0);
 
-	// get boss enemies
-	vector<Enemy*> bosses;
-	for (Enemy* enemy : Game::getInstance().getEnemies())
-	{
-		if (enemy->getBoss()) bosses.push_back(enemy);
-	}
-
 	// copy the object and create new pointer to object
-	Enemy* enemy1 = new Enemy(*bosses.at(rand() % (bosses.size() - 1)));
+	Enemy* enemy1 = new Enemy(*Game::getInstance().getBosses().at(rand() % (Game::getInstance().getBosses().size() - 1)));
 	enemy1->setLocation(mapList.at(4)->getExit());
 	enemy1->setLevel(mapList.at(4)->getLevel());
 	enemy1->boostStats();
@@ -38,13 +31,14 @@ Dungeon::Dungeon()
 	mapList.at(4)->addEnemy(enemy1);
 
 	// copy the object and create new pointer to object
-	Enemy* enemy2 = new Enemy(*bosses.at(rand() % (bosses.size() - 1)));
+	Enemy* enemy2 = new Enemy(*Game::getInstance().getBosses().at(rand() % (Game::getInstance().getBosses().size() - 1)));
 	enemy2->setLocation(mapList.at(9)->getExit());
 	enemy2->setLevel(mapList.at(9)->getLevel());
 	enemy2->boostStats();
 
 	// add boss to level 10
 	mapList.at(9)->addEnemy(enemy2);
+
 }
 
 

@@ -8,8 +8,6 @@ class Item
 public:
 	Item(int i, std::string n, int a, int d, int h, int p) : id(i), name(n), attack(a), defense(d), health(h), perception(p) {};
 
-	//Item(const Item &obj);  // copy constructor
-
 	~Item();
 
 	void setLocation(Room* room) { location = room; };

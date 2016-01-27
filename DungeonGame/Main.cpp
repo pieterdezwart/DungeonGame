@@ -21,7 +21,7 @@ int main(int argc, char* args[]) {
 
 	Game::getInstance().gameLoop();
 
-	_CrtDumpMemoryLeaks();
+	//_CrtDumpMemoryLeaks();
 
 	return 0;
 }

@@ -3,6 +3,8 @@
 #include <string>
 #include "FightState.h"
 #include "Item.h"
+#include "MenuState.h"
+#include "ExploreState.h"
 
 bool InputHandler::handleInput()
 {
@@ -21,7 +23,9 @@ bool InputHandler::handleInput()
 			std::cin >> input;
 
 			if(input == "ok") Game::getInstance().resetHero();
-			else return true;
+			else Game::getInstance().getFSM()->changeState(new MenuState());
+
+			return true;
 
 		}
 		else if (input == "new game")
@@ -82,6 +86,15 @@ bool InputHandler::handleInput()
 		{
 			Game::getInstance().getHero()->rest();
 			return false;
+		}
+		if (input == "exit")
+		{
+			Game::getInstance().save();
+			Game::getInstance().getFSM()->changeState(new MenuState());
+		}
+		if (input == "back")
+		{
+			Game::getInstance().getFSM()->changeState(new ExploreState());
 		}
 		else
 		{
@@ -148,8 +161,12 @@ void InputHandler::move()
 	cin >> dir;
 	if (!Game::getInstance().getHero()->move(dir))
 	{
-		cout << "You run in to a wall, try again \n";
-		move();
+		if(dir == "back")
+			Game::getInstance().getFSM()->changeState(new ExploreState());
+		else {
+			cout << "You run in to a wall, try again \n";
+			move();
+		}
 	}
 	//system("cls");
 	//cout << Game::getInstance().getRoom() << "\n"; //print room description
@@ -157,7 +174,7 @@ void InputHandler::move()
 
 void InputHandler::block()
 {
-	cout << getOptions() << "\n";
+	//cout << getOptions() << "\n";
 	handleInput();
 }
 

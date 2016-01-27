@@ -1,4 +1,6 @@
-1,klein,gemiddeld,groot
-2,opgeruimd,smerig
-3,tafel met 4 stoelen,een bed,leeg
-4,een kaars,een fakkel,een haardvuur
+1,small,average,large
+2,clean,filthy
+3,a table,a table with four chairs,a bed,a desk,a skeleton,chains,nothing
+4,a candle,a torch,a fireplace,a campfire,nothing
+5,moody,gloomy,damp,cozy,chilly
+6,a painting,a small hole,a chained skeleton,nothing

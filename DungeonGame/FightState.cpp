@@ -96,9 +96,15 @@ void FightState::pickEnemy()
 
 	std::cout << "[";
 
+	int size = 1;
 	for (auto enemy : enemyList)
 	{
-		std::cout << enemy.first << "|";
+		if (size != enemyList.size())
+			std::cout << enemy.first << "|";
+		else
+			std::cout << enemy.first << "";
+
+		size++;
 	}
 
 	std::cout << "]\n";
@@ -112,7 +118,6 @@ void FightState::pickEnemy()
 
 void FightState::result(std::string input)
 {
-
 	// hero attacks
 	int eHealth = enemyList.at(input)->getHealth();
 
@@ -170,10 +175,10 @@ void FightState::attemptFlee()
 {
 	if (bossFight())return;
 	int roll = rand() % 100;
-	if (roll > 80)
+	if (roll > 50)
 	{
 		Game::getInstance().getFSM()->changeState(new ExploreState());
-		Game::getInstance().setMessage("You have successfully fleed your enemies!\n");
+		Game::getInstance().setMessage("You have successfully fled from your enemies!\n");
 	}
 	else {
 		Game::getInstance().setMessage("Your fleeing attempt failed!\n");

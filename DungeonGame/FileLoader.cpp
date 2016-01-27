@@ -106,6 +106,20 @@ void FileLoader::parseRooms()
 					if(token != tokens.at(0)) Game::getInstance().addRoomLight(token);
 				}
 			}
+			if (tokens.at(0) == "5")
+			{
+				for (std::string token : tokens)
+				{
+					if (token != tokens.at(0)) Game::getInstance().addRoomAtmosphere(token);
+				}
+			}
+			if (tokens.at(0) == "6")
+			{
+				for (std::string token : tokens)
+				{
+					if (token != tokens.at(0)) Game::getInstance().addRoomWall(token);
+				}
+			}
 
 		}
 	}
@@ -133,8 +147,10 @@ void FileLoader::parseEnemies()
 
 			vector<string> enemyProperties = split(line, ',');
 
-			Game::getInstance().addEnemy(new Enemy(enemyProperties.at(0), std::stoi(enemyProperties.at(1)), std::stoi(enemyProperties.at(2)), std::stoi(enemyProperties.at(3)), std::stoi(enemyProperties.at(4)), std::stoi(enemyProperties.at(5))));
-
+			if(std::stoi(enemyProperties.at(5)) == 0)
+				Game::getInstance().addEnemy(new Enemy(enemyProperties.at(0), std::stoi(enemyProperties.at(1)), std::stoi(enemyProperties.at(2)), std::stoi(enemyProperties.at(3)), std::stoi(enemyProperties.at(4)), std::stoi(enemyProperties.at(5))));
+			else 
+				Game::getInstance().addBoss(new Enemy(enemyProperties.at(0), std::stoi(enemyProperties.at(1)), std::stoi(enemyProperties.at(2)), std::stoi(enemyProperties.at(3)), std::stoi(enemyProperties.at(4)), std::stoi(enemyProperties.at(5))));
 		}
 	}
 	catch (std::ifstream::failure e) {

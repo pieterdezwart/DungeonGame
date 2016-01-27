@@ -46,7 +46,7 @@ void Map::display(Room* heropos)
 				if (r == heropos)
 					cout << "H";
 				else
-					(r->isExplored()) ? cout << r->getType() : cout << " ";
+					(r->isExplored()) ? cout << r->getType() : cout << ".";
 				(r->getEdge("east") && (r->isExplored() || r->getEdge("east")->isExplored())) ? cout << "-" : cout << " ";
 			}
 			else

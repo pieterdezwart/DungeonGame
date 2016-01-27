@@ -95,6 +95,7 @@ void Hero::addExp(int x)
 void Hero::printStats()
 {
 	cout << "Hero's stats:\n";
+	cout << "Level: \t" << getLevel() << "\n";
 	cout << "Health: \t" << getHealth() << "\n";
 	cout << "Attack: \t" << getAttack() << "\n";
 	cout << "Defense: \t" << getDefense() << "\n";

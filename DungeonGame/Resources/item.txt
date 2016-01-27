@@ -1,6 +1,13 @@
-1,gouden munt,0,0,0,0
-2,zilveren munt,0,0,0,0
-3,zwaard,15,0,0,0
-4,hamer,10,0,0,0
-5,houten schild,0,10,0,0
+1,golden coin,0,0,0,0
+2,silver coin,0,0,0,0
+3,wooden sword,15,0,0,0
+4,blunt hammer,10,0,0,0
+5,wooden shield,0,10,0,0
 6,potion,0,0,50,0
+7,metal shield,0,20,0,0
+8,iron sword,25,0,0,0
+9,silver sword,30,0,0,0
+10,mace,20,0,0,0
+11,bandana,0,0,0,5
+12,large potion,0,0,100,0
+13,sneaking shoes,0,0,0,10
